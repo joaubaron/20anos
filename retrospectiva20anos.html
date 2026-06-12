@@ -14,16 +14,14 @@
   /* ===== FUNDO ROMÂNTICO ESTÁTICO (sem movimento) ===== */
   body {
     font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
-    background: #ffe6f0;  /* tom quente e romântico base */
+    background: #ffe6f0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 40px 20px 80px;
     position: relative;
-    /* Fundo romântico fixo: pétalas sutis + coraçãozinho + textura amorosa */
     background-image: 
-      /* corações pequenos e delicados (sem repetição em movimento) */
       radial-gradient(circle at 15% 20%, rgba(255, 90, 130, 0.12) 1.8px, transparent 1.8px),
       radial-gradient(circle at 75% 45%, rgba(255, 110, 150, 0.1) 2px, transparent 2px),
       radial-gradient(circle at 92% 78%, rgba(255, 80, 120, 0.12) 2.2px, transparent 2.2px),
@@ -31,14 +29,12 @@
       radial-gradient(circle at 44% 12%, rgba(255, 100, 140, 0.08) 2.5px, transparent 2.5px),
       radial-gradient(circle at 63% 92%, rgba(255, 115, 155, 0.1) 1.8px, transparent 1.8px),
       radial-gradient(circle at 88% 33%, rgba(255, 95, 135, 0.12) 2px, transparent 2px),
-      /* flores/sutis formas de pétala */
       radial-gradient(ellipse at 27% 58%, rgba(255, 220, 200, 0.2) 8px, transparent 8px),
       radial-gradient(ellipse at 71% 29%, rgba(255, 200, 180, 0.2) 9px, transparent 9px),
       radial-gradient(ellipse at 5% 44%, rgba(255, 210, 190, 0.18) 10px, transparent 10px),
       radial-gradient(ellipse at 93% 67%, rgba(255, 205, 185, 0.2) 12px, transparent 12px),
-      /* fundo com leve textura de rosa chá */
       repeating-linear-gradient(45deg, rgba(255, 200, 220, 0.2) 0px, rgba(255, 200, 220, 0.2) 2px, transparent 2px, transparent 12px);
-    background-attachment: fixed;  /* fundo estático fixo — NÃO SE MOVE */
+    background-attachment: fixed;
     background-size: 60px 60px, 70px 70px, 80px 80px, 90px 90px, 100px 100px, 110px 110px, 120px 120px, 140px 140px, 160px 160px, 180px 180px, auto;
     background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat;
     background-position: 
@@ -46,7 +42,6 @@
       27% 58%, 71% 29%, 5% 44%, 93% 67%, 0 0;
   }
 
-  /* camada extra de degradê suave para dar profundidade romântica (fixo) */
   body::before {
     content: "";
     position: fixed;
@@ -56,13 +51,11 @@
     z-index: 0;
   }
 
-  /* todos os conteúdos acima do fundo */
   header, .timeline, .finale {
     position: relative;
     z-index: 2;
   }
 
-  /* cabeçalho romântico */
   header {
     text-align: center;
     margin-bottom: 20px;
@@ -101,7 +94,6 @@
     margin-top: 5px;
   }
 
-  /* linha do tempo elegante */
   .timeline {
     position: relative;
     width: 100%;
@@ -187,6 +179,7 @@
     align-items: center;
     justify-content: center;
     box-shadow: inset 0 0 0 2px rgba(255, 235, 215, 0.9);
+    position: relative;
   }
 
   .frame img {
@@ -201,6 +194,26 @@
     transform: scale(1.02);
   }
 
+  /* DATA NO TOPO DA FOTO (dentro da moldura) */
+  .photo-date {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: rgba(255, 245, 240, 0.85);
+    backdrop-filter: blur(4px);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #c25274;
+    letter-spacing: 1px;
+    border: 1px solid rgba(255, 180, 160, 0.6);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    z-index: 3;
+    pointer-events: none;
+  }
+
   .caption {
     margin-top: 14px;
     font-family: 'Brush Script MT', 'Segoe Script', cursive;
@@ -211,44 +224,7 @@
     text-shadow: 1px 1px 0 rgba(255, 235, 225, 0.8);
   }
 
-  .date {
-    margin-top: 6px;
-    text-align: center;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #cc8f9c;
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-  }
-
-  .num {
-    position: absolute;
-    top: -35px;
-    font-size: 0.75rem;
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    background: rgba(255, 245, 240, 0.7);
-    backdrop-filter: blur(4px);
-    padding: 4px 10px;
-    border-radius: 50px;
-    letter-spacing: 1px;
-    color: #c25274;
-    border: 1px solid #ffbbcc;
-    transform: rotate(var(--rot, -2deg));
-    z-index: 2;
-    white-space: nowrap;
-  }
-
-  .entry:nth-child(odd) .num {
-    right: calc(50% + 40px);
-  }
-
-  .entry:nth-child(even) .num {
-    left: calc(50% + 40px);
-  }
-
-  /* Finale — mensagem de amor */
+  /* Finale */
   .finale {
     z-index: 2;
     margin-top: 50px;
@@ -287,7 +263,6 @@
     letter-spacing: 1px;
   }
 
-  /* pequena animação suave apenas pro coração, sem movimento de fundo */
   @keyframes softPulse {
     0% { transform: scale(1); opacity: 0.9; text-shadow: 0 0 2px #ffb7c7; }
     50% { transform: scale(1.08); opacity: 1; text-shadow: 0 0 12px #ff90b0; }
@@ -306,7 +281,6 @@
     transform: translateY(0);
   }
 
-  /* botão / toque feedback */
   @media (max-width: 560px) {
     body {
       padding: 20px 12px 60px;
@@ -317,19 +291,6 @@
       padding: 12px 12px 16px;
     }
 
-    .num {
-      font-size: 0.65rem;
-      top: -30px;
-    }
-
-    .entry:nth-child(odd) .num {
-      right: calc(50% + 20px);
-    }
-
-    .entry:nth-child(even) .num {
-      left: calc(50% + 20px);
-    }
-
     .caption {
       font-size: 1rem;
     }
@@ -337,9 +298,15 @@
     header .small {
       font-size: 2rem;
     }
+
+    .photo-date {
+      font-size: 0.6rem;
+      top: 6px;
+      right: 8px;
+      padding: 3px 8px;
+    }
   }
 
-  /* placeholder para imagens faltantes mais delicado */
   .frame span.placeholder-txt {
     display: flex;
     align-items: center;
@@ -355,12 +322,6 @@
     border-radius: 10px;
   }
 
-  /* coração alternativo dentro das entradas  */
-  .heart span {
-    font-size: 1.3rem;
-  }
-
-  /* pequeno detalhe extra romântico fixo : fitas */
   .romantic-touch {
     pointer-events: none;
     position: fixed;
@@ -385,13 +346,12 @@
   <span class="heart-big">💖</span>
   <h2>Vinte Anos</h2>
   <p>Juntos e fortes ❤️</p>
-  <p style="font-size: 0.9rem; font-family: Georgia; margin-top: 12px;">&nbsp;</p>
 </div>
 
 <div class="romantic-touch">🌹💌</div>
 
 <script>
-  // Lista de legendas românticas personalizadas (20 memórias especiais)
+  // Legendas românticas
   const memories = [
     "✨ Onde tudo começou",
     "💍 O primeiro SIM",
@@ -413,7 +373,31 @@
     "🌟 Companheiros de sempre",
     "💘 Quase lá...",
     "❤️ 20 ANOS DE HISTÓRIA"
-];
+  ];
+
+  // Datas no formato DD/MM/AAAA (aparecerão APENAS no topo da foto)
+  const datesList = [
+    "05/04/2007",
+    "12/07/2007",
+    "03/02/2008",
+    "22/09/2009",
+    "15/05/2010",
+    "08/08/2011",
+    "14/02/2013",
+    "19/10/2014",
+    "25/12/2015",
+    "30/04/2016",
+    "11/11/2017",
+    "01/06/2018",
+    "20/01/2019",
+    "07/07/2020",
+    "09/09/2021",
+    "13/10/2022",
+    "24/12/2023",
+    "10/05/2024",
+    "01/01/2025",
+    "05/04/2027"
+  ];
 
   const timelineContainer = document.getElementById('timeline');
   if (timelineContainer) {
@@ -421,34 +405,23 @@
       const entry = document.createElement('div');
       entry.className = 'entry';
 
-      // Define ícone de coração variado entre 💗💖💘💝 pra ficar ainda mais romântico
       const heartIcon = i % 3 === 0 ? '💗' : (i % 2 === 0 ? '💖' : '💘');
-      
-      // número do ano/ etapa
-      const yearLabel = `${String(i).padStart(2, '0')} / 20`;
-
-      // legenda e descrição com um toque adicional
+      const displayDate = datesList[i-1];
       const captionText = memories[i - 1];
-      
-      // caminho das imagens: fotos/foto1.webp até foto20.webp
-      // Para uma experiência mais completa, usei tratamento onerror com placeholder visual bonito.
       const imgSrc = `fotos/foto${i}.webp`;
       
-      // montagem do polaroid + estrutura
       entry.innerHTML = `
-        <div class="num">${yearLabel}</div>
         <div class="heart">${heartIcon}</div>
         <div class="polaroid">
           <div class="frame" id="frame-${i}">
+            <div class="photo-date">${displayDate}</div>
             <img src="${imgSrc}" alt="Momento ${i}" loading="lazy" 
-                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'placeholder-txt\\' style=\\'display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; background:#f9e2d6; color:#bb6e88; border-radius:10px;\\'><span>💌 ${captionText.split(' ')[0]} ${i}</span><span style=\\'font-size:0.7rem; margin-top:8px\\'>📸 adicione foto${i}.webp</span></div>';">
+                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'placeholder-txt\\' style=\\'display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; background:#f9e2d6; color:#bb6e88; border-radius:10px;\\'><span>💌 ${captionText.split(' ')[0]} ${i}</span><span style=\\'font-size:0.7rem; margin-top:8px\\'>📸 adicione foto${i}.webp</span></div><div class=\\'photo-date\\' style=\\'position:absolute; top:10px; right:12px;\\'>${displayDate}</div>';">
           </div>
           <div class="caption">${captionText}</div>
-          <div class="date"></div>
         </div>
       `;
 
-      // adicionar evento de clique para o efeito 'touched' (interação romântica)
       const polaroidDiv = entry.querySelector('.polaroid');
       if (polaroidDiv) {
         polaroidDiv.addEventListener('click', function(e) {
@@ -464,7 +437,7 @@
     }
   }
 
-  // Intersection Observer para animação suave ao rolar (revelação gradativa)
+  // Intersection Observer para animação suave
   const observerOptions = {
     threshold: 0.2,
     rootMargin: "0px 0px -10px 0px"
@@ -474,7 +447,6 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view');
-        // pode continuar observando mas sem remover classe, fica visível
       }
     });
   }, observerOptions);
@@ -483,8 +455,6 @@
     observer.observe(el);
   });
   
-  // Caso queira garantir que algumas entradas já visíveis na carga já apareçam
-  // disparar manualmente um pequeno timeout pra recalcular interseção
   setTimeout(() => {
     document.querySelectorAll('.entry').forEach(el => {
       const rect = el.getBoundingClientRect();
@@ -494,11 +464,8 @@
     });
   }, 200);
   
-  // Adicionar um toque de realidade: se não existirem as pastas de imagem, o placeholder fofo aparece
-  // Também exibir uma pequena mensagem carinhosa no console (sem poluição)
-  console.log("%c💖 20 anos juntos! Que cada fotografia represente memórias inesquecíveis 💖", "color: #e6577c; font-size: 14px; font-family: monospace;");
+  console.log("%c💖 20 anos juntos! Cada data guarda uma memória especial. 💖", "color: #e6577c; font-size: 14px; font-family: monospace;");
   
-  // efeito adicional para as polaroids com toque em dispositivos móveis (nada que mova o fundo)
   if ('ontouchstart' in window) {
     document.querySelectorAll('.polaroid').forEach(p => {
       p.addEventListener('touchstart', function() {
@@ -509,11 +476,6 @@
       });
     });
   }
-
-  // pequeno detalhe decorativo (mas o fundo é completamente estático, sem mover)
-  // Está tudo fixo: o background-attachment: fixed garante que não role junto, e nenhum keyframe mexe.
-  // as estrelas/pétalas não se movem — imagem estática romântica.
-  // Pronto, um cenário aconchegante pro dia dos namorados!
 </script>
 </body>
 </html>
