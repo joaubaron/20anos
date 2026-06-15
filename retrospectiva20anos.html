@@ -303,14 +303,14 @@
     50% { transform: scale(1.08); opacity: 1; }
   }
 
-  /* ===== LETRA FLUTUANTE ===== */
-  .lyrics-overlay {
+  /* ===== LETRA FLUTUANTE (MODAL DE LETRA) ===== */
+  .lyrics-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(12px);
     z-index: 2000;
     display: flex;
@@ -319,10 +319,9 @@
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    cursor: pointer;
   }
 
-  .lyrics-overlay.active {
+  .lyrics-modal.active {
     opacity: 1;
     visibility: visible;
   }
@@ -330,18 +329,19 @@
   .lyrics-card {
     background: linear-gradient(145deg, #fff5f8, #ffeef4);
     max-width: 90%;
-    width: 400px;
-    max-height: 80vh;
+    width: 420px;
+    max-height: 85vh;
     border-radius: 48px;
-    padding: 28px 24px;
+    padding: 28px 24px 32px;
     box-shadow: 0 30px 50px rgba(200, 70, 100, 0.5);
     text-align: center;
     overflow-y: auto;
     transform: scale(0.9);
     transition: transform 0.3s ease;
+    position: relative;
   }
 
-  .lyrics-overlay.active .lyrics-card {
+  .lyrics-modal.active .lyrics-card {
     transform: scale(1);
   }
 
@@ -387,31 +387,26 @@
     margin: 16px 0;
   }
 
-  .tap-hint {
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(230, 107, 138, 0.9);
+  .close-lyrics-btn {
+    background: linear-gradient(135deg, #e66b8a, #d45a7a);
+    border: none;
     color: white;
-    padding: 8px 20px;
+    font-size: 1rem;
+    padding: 10px 28px;
     border-radius: 40px;
-    font-size: 0.8rem;
+    cursor: pointer;
     font-family: 'Georgia', serif;
-    z-index: 15;
-    opacity: 0;
-    animation: fadeInOut 3s ease forwards;
-    pointer-events: none;
-    white-space: nowrap;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    margin-top: 20px;
   }
 
-  @keyframes fadeInOut {
-    0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
-    15% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    85% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    100% { opacity: 0; transform: translateX(-50%) translateY(-10px); visibility: hidden; }
+  .close-lyrics-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #c04e6e, #b83a5a);
   }
 
+  /* Botão surpresa */
   .surprise-btn {
     position: fixed;
     bottom: 20px;
@@ -439,6 +434,7 @@
     transform: scale(1.05);
   }
 
+  /* Modal de mensagem inicial */
   .modal-overlay {
     position: fixed;
     top: 0;
@@ -587,6 +583,32 @@
     display: none;
   }
 
+  /* Dica para abrir letra */
+  .lyrics-hint {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(230, 107, 138, 0.9);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-family: 'Georgia', serif;
+    z-index: 15;
+    opacity: 0;
+    animation: fadeInOut 3s ease forwards;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-10px); visibility: hidden; }
+  }
+
   @media (max-width: 560px) {
     body {
       padding: 20px 12px 60px;
@@ -641,7 +663,7 @@
       font-size: 0.9rem;
     }
 
-    .tap-hint {
+    .lyrics-hint {
       font-size: 0.7rem;
       bottom: 70px;
       white-space: nowrap;
@@ -650,6 +672,7 @@
 
   .frame span.placeholder-txt {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 0.8rem;
@@ -670,8 +693,8 @@
   <source src="viversemar.mp3" type="audio/mpeg">
 </audio>
 
-<!-- LETRA FLUTUANTE -->
-<div class="lyrics-overlay" id="lyricsOverlay">
+<!-- MODAL DA LETRA (aparece após fechar o modal inicial) -->
+<div class="lyrics-modal" id="lyricsModal">
   <div class="lyrics-card">
     <div class="lyrics-title">🎵 Viver Sem Ar 🎵</div>
     <div class="lyrics-content">
@@ -682,10 +705,11 @@
       <p class="chorus">♥ Mas eu não posso, sinto que morro ♥<br>♥ Estou afogando sem o seu amor ♥<br>♥ Te amo hoje, te amo sempre, Claudia ♥<br>♥ Minha vida inteira em você se deságua ♥</p>
       <p>Como eu queria poder viver sem ar...<br>Mas não posso, Claudia...<br>Sem o seu amor... 💕</p>
     </div>
+    <button class="close-lyrics-btn" id="closeLyricsBtn">Fechar e parar música ❤️</button>
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- MODAL DE MENSAGEM INICIAL -->
 <div class="modal-overlay" id="surpriseModal">
   <div class="modal-container">
     <div class="close-modal-x" id="closeModalBtn">✕</div>
@@ -694,13 +718,13 @@
     <div class="modal-message-text" id="modalMessageText">
       💝 20 anos juntos! Você é o amor da minha vida! 💝
     </div>
-    <button class="modal-btn" id="modalCloseBtn">Fechar com amor ❤️</button>
+    <button class="modal-btn" id="modalCloseBtn">Fechar e ver a letra ❤️</button>
   </div>
 </div>
 
 <button class="surprise-btn" id="surpriseBtn">🎁 Surpresa de 20 anos ❤️</button>
 
-<div class="tap-hint" id="tapHint">💡 Toque na tela para ver a letra da música 💡</div>
+<div class="lyrics-hint" id="lyricsHint">💡 Após fechar, a letra da música vai aparecer! 💡</div>
 
 <header>
   <div class="small">Nossos 💕 20 anos</div>
@@ -836,15 +860,11 @@
 
   // Áudio
   const audioElement = document.getElementById('surpriseAudio');
-  let isAudioPlaying = false;
-  let isModalOpen = false;
-
+  
   function playAudio() {
     if (audioElement) {
       audioElement.currentTime = 0;
-      audioElement.play().then(() => {
-        isAudioPlaying = true;
-      }).catch(e => console.log("Áudio não pôde ser reproduzido:", e));
+      audioElement.play().catch(e => console.log("Áudio não pôde ser reproduzido:", e));
     }
   }
 
@@ -852,78 +872,61 @@
     if (audioElement) {
       audioElement.pause();
       audioElement.currentTime = 0;
-      isAudioPlaying = false;
     }
   }
 
-  // Letra flutuante (SÓ funciona se modal estiver FECHADO)
-  const lyricsOverlay = document.getElementById('lyricsOverlay');
-  
-  function showLyrics() {
-    if (!isModalOpen && isAudioPlaying) {
-      lyricsOverlay.classList.add('active');
-    }
-  }
-  
-  function hideLyrics() {
-    lyricsOverlay.classList.remove('active');
-  }
-
-  // Toque na tela (SÓ quando modal está fechado)
-  document.body.addEventListener('touchstart', (e) => {
-    if (!isModalOpen && isAudioPlaying) {
-      showLyrics();
-    }
-  });
-  
-  document.body.addEventListener('touchend', (e) => {
-    if (!isModalOpen && isAudioPlaying) {
-      hideLyrics();
-    }
-  });
-  
-  // Desktop (mouse)
-  document.body.addEventListener('mousedown', () => {
-    if (!isModalOpen && isAudioPlaying) {
-      showLyrics();
-    }
-  });
-  
-  document.body.addEventListener('mouseup', () => {
-    if (!isModalOpen && isAudioPlaying) {
-      hideLyrics();
-    }
-  });
-  
-  // Clicar no overlay da letra fecha
-  lyricsOverlay.addEventListener('click', (e) => {
-    if (e.target === lyricsOverlay) hideLyrics();
-  });
-
-  // Modal
+  // Elementos
   const modalOverlay = document.getElementById('surpriseModal');
   const modalMessageText = document.getElementById('modalMessageText');
   const closeModalBtn = document.getElementById('closeModalBtn');
   const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const lyricsModal = document.getElementById('lyricsModal');
+  const closeLyricsBtn = document.getElementById('closeLyricsBtn');
 
   function showSurpriseModal(message) {
     modalMessageText.innerHTML = message;
     modalOverlay.classList.add('active');
-    isModalOpen = true;
     playAudio();
   }
 
-  function closeModal() {
+  function closeModalAndShowLyrics() {
     modalOverlay.classList.remove('active');
-    isModalOpen = false;
-    stopAudio();
-    hideLyrics();
+    // Abre o modal da letra (música continua tocando)
+    lyricsModal.classList.add('active');
   }
 
-  if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+  function closeLyricsAndStopMusic() {
+    lyricsModal.classList.remove('active');
+    stopAudio();
+  }
+
+  // Fechar modal inicial com o X
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeModalAndShowLyrics);
+  }
+  
+  // Fechar modal inicial com o botão
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', closeModalAndShowLyrics);
+  }
+  
+  // Fechar modal da letra e parar música
+  if (closeLyricsBtn) {
+    closeLyricsBtn.addEventListener('click', closeLyricsAndStopMusic);
+  }
+  
+  // Clicar fora do modal da letra também fecha
+  lyricsModal.addEventListener('click', (e) => {
+    if (e.target === lyricsModal) {
+      closeLyricsAndStopMusic();
+    }
+  });
+  
+  // Clicar fora do modal inicial NÃO faz nada (apenas os botões)
   modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) closeModal();
+    if (e.target === modalOverlay) {
+      // Não faz nada - só fecha se clicar no X ou botão
+    }
   });
 
   // Botão surpresa
@@ -965,7 +968,7 @@
     });
   }
   
-  console.log("%c💖 20 anos, Claudia! Toque na tela para ver a letra da música 💖", "color: #e6577c; font-size: 14px");
+  console.log("%c💖 20 anos, Claudia! Clique no botão surpresa 💖", "color: #e6577c; font-size: 14px");
 </script>
 </body>
 </html>
