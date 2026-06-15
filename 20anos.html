@@ -880,7 +880,7 @@ io.observe(document.getElementById('finale'));
 // ── ÁUDIO ──
 const audio = document.getElementById('surpriseAudio');
 
-const bgAudio = new Audio('/lavitaadesso.mp3');
+const bgAudio = new Audio('lavitaadesso.mp3');
 bgAudio.loop = true;
 bgAudio.volume = 0.18;
 
@@ -889,7 +889,7 @@ function stopBg() { bgAudio.pause(); bgAudio.currentTime = 0; }
 
 function playAudio() {
   stopBg();
-  audio.src = '/20anos/viversemar.mp3';
+  audio.src = 'viversemar.mp3';
   audio.load();
   audio.currentTime = 0;
   audio.play().catch(() => {});
