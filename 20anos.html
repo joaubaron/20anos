@@ -528,7 +528,7 @@
 
   .lyrics-stanza {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
+    font-size: 1.05rem;
     line-height: 2;
     color: var(--text-warm);
     margin: 0 0 18px;
@@ -537,7 +537,7 @@
 
   .lyrics-chorus {
     font-family: 'Dancing Script', cursive;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     line-height: 1.8;
     color: var(--rose);
     font-weight: 700;
@@ -639,6 +639,7 @@
   <div class="opening-year">20</div>
   <div class="opening-heart">❤️</div>
   <div class="opening-title">Cláudia, esta história é nossa</div>
+  <div class="opening-sub">toque para começar</div>
 </div>
 
 <!-- CANVAS FUNDO -->
@@ -651,11 +652,11 @@
 <div class="modal-overlay" id="lyricsModal">
   <div class="modal-card">
     <div class="modal-deco"></div>
-    <div class="modal-title">Viver com Você</div>
+    <div class="modal-title">Viver Sem Você</div>
     <div class="modal-subtitle">uma canção para Cláudia</div>
 
     <div class="lyrics-stanza">
-     🌹 Como eu queria poder viver sem ar<br>
+      🌹 Como eu queria poder viver sem ar<br>
       Mas não consigo, sinto que vou morrer<br>
       Vinte anos se passaram ao seu lado<br>
       <strong>Cláudia</strong>, cada dia eu só quero você
@@ -665,13 +666,13 @@
 
     <div class="lyrics-stanza">
       🐟 Como um peixe não consegue sem a água<br>
-      Como um pássaro não voa sem ter asas<br>
+      🕊️ Como um pássaro não voa sem ter asas<br>
       Nas curvas da vida você me deu a mão<br>
       Superamos tempestades, <strong>Cláudia</strong>
     </div>
 
     <div class="lyrics-chorus">
-      ❤️ Mas eu não posso, sinto que morro<br>
+      Mas eu não posso, sinto que morro<br>
       Estou afogando sem o seu amor<br>
       Te amo hoje, te amo sempre, Cláudia<br>
       Que venham mais vinte, trinta e além
@@ -679,20 +680,20 @@
 
     <div class="lyrics-stanza">
       💧 Como eu queria poder viver sem água<br>
-      Mas não consigo sem o seu calor<br>
+      🔥 Mas não consigo sem o seu calor<br>
       Dois corações, uma só direção<br>
       Cada dia ao seu lado é um lugar especial, <strong>Cláudia</strong>
     </div>
 
     <div class="lyrics-chorus">
-      ❤️ Mas eu não posso, sinto que morro<br>
+      Mas eu não posso, sinto que morro<br>
       Estou afogando sem o seu amor<br>
       Te amo hoje, te amo sempre, Cláudia<br>
       Minha vida inteira em você se deságua
     </div>
 
     <div class="lyrics-stanza">
-      Como eu queria poder viver sem ar...<br>
+      🌟 Como eu queria poder viver sem ar...<br>
       Mas não posso, <strong>Cláudia</strong>...<br>
       Sem o seu amor... 💕
     </div>
@@ -723,6 +724,7 @@
 
   <div class="finale" id="finale">
     <div class="finale-divider">❤️</div>
+    <div class="finale-heart">❤️</div>
     <h2 class="finale-title">Vinte Anos</h2>
     <p class="finale-poem">
       Cada manhã ao seu lado<br>
@@ -765,10 +767,10 @@ const hoverTexts = [
 ];
 
 const datesList = [
-  "05/04/2007","06/04/2007","07/04/2007","05/06/2007","05/09/2007",
+  "05/04/2007","06/04/2007","07/04/2007","05/06/2007","05/08/2007",
   "08/08/2008","14/10/2009","03/11/2010","25/12/2011","30/04/2013",
-  "11/11/2014","01/06/2018","20/01/2019","07/02/2020","09/09/2021",
-  "13/10/2022","24/11/2023","10/06/2025","21/01/2026","💗 2027"
+  "11/11/2014","01/06/2018","20/01/2019","07/07/2020","09/09/2021",
+  "13/10/2022","24/12/2023","10/06/2025","21/01/2026","✨ 2027"
 ];
 
 // ── CANVAS PARTÍCULAS SUAVES ──
@@ -830,6 +832,7 @@ function startExperience() {
     opening.style.display = 'none';
     mainContent.classList.add('visible');
   }, 1500);
+  playBg();
 }
 
 opening.addEventListener('click', startExperience);
@@ -877,7 +880,15 @@ io.observe(document.getElementById('finale'));
 // ── ÁUDIO ──
 const audio = document.getElementById('surpriseAudio');
 
+const bgAudio = new Audio('/lavitaadesso.mp3');
+bgAudio.loop = true;
+bgAudio.volume = 0.18;
+
+function playBg() { bgAudio.play().catch(() => {}); }
+function stopBg() { bgAudio.pause(); bgAudio.currentTime = 0; }
+
 function playAudio() {
+  stopBg();
   audio.src = '/20anos/viversemar.mp3';
   audio.load();
   audio.currentTime = 0;
@@ -887,6 +898,7 @@ function playAudio() {
 function stopAudio() {
   audio.pause();
   audio.currentTime = 0;
+  playBg();
 }
 
 // ── PÉTALAS ──
