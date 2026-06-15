@@ -405,7 +405,7 @@ const memories = [
 
       const heartIcon = i % 3 === 0 ? '💗' : (i % 2 === 0 ? '💖' : '💘');
       const displayDate = datesList[i-1];
-      const captionText = memories[i - 1];
+      const captionText = memories[i - 1] || "❤️ Nossa memória";
       const imgSrc = `fotos/foto${i}.webp`;
       
       entry.innerHTML = `
