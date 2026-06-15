@@ -151,31 +151,6 @@
     border-color: #ff9aba;
   }
 
-  .polaroid:hover .frame::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 220, 200, 0.3), transparent 70%);
-    pointer-events: none;
-    border-radius: 12px;
-  }
-
-  .polaroid:hover .frame img {
-    transform: scale(1.04);
-    transition: transform 0.4s ease-out;
-  }
-
-  .polaroid:active {
-    transform: rotate(0deg) scale(0.98);
-    transition: transform 0.08s;
-  }
-
-  .polaroid.touched {
-    transform: rotate(0deg) scale(0.99);
-    box-shadow: 0 18px 30px -10px #ff88aa7f;
-    transition: transform 0.1s;
-  }
-
   .frame {
     width: 100%;
     aspect-ratio: 4 / 5;
@@ -287,10 +262,6 @@
     border-radius: 40px;
   }
 
-  .poem p {
-    margin: 8px 0;
-  }
-
   .signature {
     font-family: 'Brush Script MT', cursive;
     font-size: 1.3rem;
@@ -303,14 +274,61 @@
     50% { transform: scale(1.08); opacity: 1; }
   }
 
-  /* ===== MODAL DA LETRA (MAIOR, COM ROLAGEM) ===== */
+  /* ===== BOTÃO SURPRESA ROMÂNTICO ===== */
+  .surprise-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: linear-gradient(135deg, #ff6b8a, #e6577c);
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    padding: 14px 24px;
+    border-radius: 60px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(230, 70, 110, 0.4);
+    z-index: 100;
+    transition: all 0.4s ease;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 200, 0.5);
+    animation: btnGlow 2s infinite ease-in-out;
+  }
+
+  @keyframes btnGlow {
+    0%, 100% { box-shadow: 0 8px 25px rgba(230, 70, 110, 0.4); transform: scale(1); }
+    50% { box-shadow: 0 8px 35px rgba(230, 70, 110, 0.8); transform: scale(1.03); }
+  }
+
+  .surprise-btn:hover {
+    background: linear-gradient(135deg, #e6577c, #c04e6e);
+    transform: scale(1.08);
+    gap: 16px;
+  }
+
+  .surprise-btn .btn-heart {
+    font-size: 1.3rem;
+    animation: floatHeart 1s infinite ease-in-out;
+    display: inline-block;
+  }
+
+  @keyframes floatHeart {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+
+  /* ===== MODAL ROMÂNTICO ===== */
   .lyrics-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.88);
     backdrop-filter: blur(12px);
     z-index: 2000;
     display: flex;
@@ -318,7 +336,7 @@
     justify-content: center;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
   }
 
   .lyrics-modal.active {
@@ -329,62 +347,96 @@
   .lyrics-card {
     background: linear-gradient(145deg, #fff5f8, #ffeef4);
     max-width: 90%;
-    width: 500px;
+    width: 520px;
     max-height: 85vh;
-    border-radius: 48px;
-    padding: 28px 24px 32px;
-    box-shadow: 0 30px 50px rgba(200, 70, 100, 0.5);
+    border-radius: 60px;
+    padding: 35px 28px 40px;
+    box-shadow: 0 40px 70px rgba(200, 70, 100, 0.6);
     text-align: center;
     overflow-y: auto;
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
+    transform: scale(0.85);
+    transition: transform 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
     position: relative;
+    border: 2px solid rgba(255, 200, 200, 0.8);
   }
 
   .lyrics-modal.active .lyrics-card {
     transform: scale(1);
   }
 
-  .lyrics-card::-webkit-scrollbar {
-    width: 4px;
+  .floating-hearts {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 2rem;
+    animation: heartsFloat 2s infinite;
   }
 
-  .lyrics-card::-webkit-scrollbar-track {
-    background: #ffe0e8;
-    border-radius: 10px;
-  }
-
-  .lyrics-card::-webkit-scrollbar-thumb {
-    background: #e66b8a;
-    border-radius: 10px;
+  @keyframes heartsFloat {
+    0%, 100% { transform: translateY(0); opacity: 0.8; }
+    50% { transform: translateY(-10px); opacity: 1; }
   }
 
   .lyrics-title {
     font-family: 'Brush Script MT', cursive;
-    font-size: 2rem;
+    font-size: 2.4rem;
     background: linear-gradient(135deg, #e6577c, #ff9a5e);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin-bottom: 16px;
+    margin: 15px 0 10px;
+    position: relative;
+  }
+
+  .lyrics-title::before,
+  .lyrics-title::after {
+    content: "💕";
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0.6;
+  }
+
+  .lyrics-title::before {
+    left: -30px;
+    top: 0;
+  }
+
+  .lyrics-title::after {
+    right: -30px;
+    top: 0;
   }
 
   .lyrics-content {
     font-family: 'Georgia', serif;
     font-size: 1rem;
-    line-height: 1.8;
+    line-height: 1.9;
     color: #b84c6e;
     text-align: center;
+    margin: 20px 0;
   }
 
   .lyrics-content p {
-    margin: 10px 0;
+    margin: 12px 0;
+    animation: gentleFade 0.6s ease-out;
+  }
+
+  @keyframes gentleFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .lyrics-content .chorus {
     font-weight: bold;
     color: #e6577c;
-    margin: 16px 0;
+    margin: 18px 0;
+    font-size: 1.05rem;
+    background: rgba(230, 87, 124, 0.08);
+    padding: 10px;
+    border-radius: 50px;
   }
 
   .close-lyrics-btn {
@@ -393,46 +445,63 @@
     color: white;
     font-size: 1rem;
     padding: 12px 28px;
-    border-radius: 40px;
+    border-radius: 50px;
     cursor: pointer;
     font-family: 'Georgia', serif;
     font-weight: bold;
-    transition: all 0.2s ease;
-    margin-top: 24px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
   }
 
   .close-lyrics-btn:hover {
     transform: scale(1.02);
     background: linear-gradient(135deg, #c04e6e, #b83a5a);
+    gap: 14px;
   }
 
-  /* Botão surpresa */
-  .surprise-btn {
+  /* Flores decorativas no modal */
+  .flower-deco {
+    position: absolute;
+    font-size: 1.8rem;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .flower-deco.left {
+    bottom: 15px;
+    left: 15px;
+    transform: rotate(-15deg);
+  }
+
+  .flower-deco.right {
+    top: 15px;
+    right: 15px;
+    transform: rotate(15deg);
+  }
+
+  /* Pétalas caindo */
+  .petal {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background: linear-gradient(135deg, #e66b8a, #d45a7a);
-    border: none;
-    color: white;
-    font-size: 1.2rem;
-    padding: 12px 20px;
-    border-radius: 40px;
-    cursor: pointer;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-    z-index: 10;
-    transition: all 0.3s ease;
-    font-family: 'Georgia', serif;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid rgba(255,255,200,0.3);
+    pointer-events: none;
+    z-index: 1500;
+    font-size: 18px;
+    animation: fallPetal linear forwards;
   }
 
-  .surprise-btn:hover {
-    background: linear-gradient(135deg, #c04e6e, #b83a5a);
-    transform: scale(1.05);
+  @keyframes fallPetal {
+    0% {
+      transform: translateY(-10vh) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0;
+    }
   }
 
   .confetti {
@@ -454,62 +523,22 @@
     }
   }
 
- .hidden-audio {
-  position: fixed;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-}
+  .hidden-audio {
+    position: fixed;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
 
   @media (max-width: 560px) {
-    body {
-      padding: 20px 12px 60px;
-    }
-
-    .polaroid {
-      width: 88%;
-      padding: 12px 12px 16px;
-    }
-
-    .caption {
-      font-size: 1rem;
-    }
-    
-    .caption::after {
-      font-size: 0.65rem;
-    }
-
-    header .small {
-      font-size: 2rem;
-    }
-
-    .photo-date {
-      font-size: 0.6rem;
-      top: 6px;
-      right: 8px;
-      padding: 3px 8px;
-    }
-    
-    .poem {
-      font-size: 0.85rem;
-      padding: 16px 12px;
-    }
-    
-    .surprise-btn {
-      padding: 8px 16px;
-      font-size: 1rem;
-      bottom: 15px;
-      left: 15px;
-    }
-
-    .lyrics-card {
-      width: 92%;
-      padding: 20px 16px;
-    }
-
-    .lyrics-content {
-      font-size: 0.9rem;
-    }
+    body { padding: 20px 12px 60px; }
+    .polaroid { width: 88%; padding: 12px 12px 16px; }
+    .caption { font-size: 1rem; }
+    header .small { font-size: 2rem; }
+    .surprise-btn { padding: 10px 18px; font-size: 0.95rem; bottom: 15px; right: 15px; }
+    .lyrics-card { width: 92%; padding: 25px 16px 30px; }
+    .lyrics-title { font-size: 1.8rem; }
+    .lyrics-title::before, .lyrics-title::after { font-size: 1rem; }
   }
 
   .frame span.placeholder-txt {
@@ -533,23 +562,35 @@
 
 <audio id="surpriseAudio" class="hidden-audio" preload="auto"></audio>
 
-<!-- MODAL ÚNICO: JÁ VEM COM A LETRA COMPLETA -->
+<!-- MODAL ROMÂNTICO -->
 <div class="lyrics-modal" id="lyricsModal">
   <div class="lyrics-card">
-    <div class="lyrics-title">Viver Sem Você 🎵</div>
-    <div class="lyrics-content">
-      <p>Como eu queria poder viver sem ar<br>Mas não consigo, sinto que vou morrer<br>Vinte anos se passaram ao seu lado<br>Cláudia, cada dia eu só quero você</p>
-      <p>Como um peixe não consegue sem a água<br>Como um pássaro não voa sem ter asas<br>Nas curvas da vida você me deu a mão<br>Superamos tempestades, Cláudia</p>
-      <p class="chorus">♥ Mas eu não posso, sinto que morro<br>Estou afogando sem o seu amor ♥<br>♥ Te amo hoje, te amo sempre, Cláudia<br>Que venham mais vinte, trinta e além ♥</p>
-      <p>Como eu queria poder viver sem água<br>Mas não consigo sem o seu calor<br>Dois corações, uma só direção<br>Cada dia ao seu lado é um lugar especial, Cláudia</p>
-      <p class="chorus">♥ Mas eu não posso, sinto que morro<br>Estou afogando sem o seu amor ♥<br>♥ Te amo hoje, te amo sempre, Cláudia<br>Minha vida inteira em você se deságua ♥</p>
-      <p>Como eu queria poder viver sem ar...<br>Mas não posso, Cláudia...<br>Sem o seu amor... 💕</p>
+    <div class="floating-hearts">
+      <span>💗</span><span>💖</span><span>💕</span><span>💘</span><span>💓</span>
     </div>
-    <button class="close-lyrics-btn" id="closeLyricsBtn">🎵 Fechar e parar a música</button>
+    <div class="flower-deco left">🌹</div>
+    <div class="flower-deco right">🌸</div>
+    <div class="lyrics-title">🎵 Viver Sem Você 🎵</div>
+    <div class="lyrics-content">
+      <p>🌹 Como eu queria poder viver sem ar<br>Mas não consigo, sinto que vou morrer<br>Vinte anos se passaram ao seu lado<br><strong>Cláudia</strong>, cada dia eu só quero você 💕</p>
+      <p>🐟 Como um peixe não consegue sem a água<br>🕊️ Como um pássaro não voa sem ter asas<br>Nas curvas da vida você me deu a mão<br>Superamos tempestades, <strong>Cláudia</strong></p>
+      <p class="chorus">💗 <strong>Mas eu não posso, sinto que morro<br>Estou afogando sem o seu amor</strong> 💗<br>💖 <strong>Te amo hoje, te amo sempre, Cláudia<br>Que venham mais vinte, trinta e além</strong> 💖</p>
+      <p>💧 Como eu queria poder viver sem água<br>🔥 Mas não consigo sem o seu calor<br>Dois corações, uma só direção<br>Cada dia ao seu lado é um lugar especial, <strong>Cláudia</strong></p>
+      <p class="chorus">💗 <strong>Mas eu não posso, sinto que morro<br>Estou afogando sem o seu amor</strong> 💗<br>💖 <strong>Te amo hoje, te amo sempre, Cláudia<br>Minha vida inteira em você se deságua</strong> 💖</p>
+      <p>🌟 Como eu queria poder viver sem ar...<br>Mas não posso, <strong>Cláudia</strong>...<br>Sem o seu amor... <strong>pra sempre</strong> 💕</p>
+    </div>
+    <button class="close-lyrics-btn" id="closeLyricsBtn">
+      <span>🎵</span> Fechar e parar a música <span>💕</span>
+    </button>
   </div>
 </div>
 
-<button class="surprise-btn" id="surpriseBtn">Surpresa de 20 anos ❤️</button>
+<!-- BOTÃO SURPRESA ROMÂNTICO -->
+<button class="surprise-btn" id="surpriseBtn">
+  <span class="btn-heart">💖</span>
+  <span>Surpresa de 20 Anos</span>
+  <span class="btn-heart">💕</span>
+</button>
 
 <header>
   <div class="small">Nossos 💕 20 anos</div>
@@ -565,7 +606,6 @@
 </div>
 
 <script>
-  // Legendas (mantidas iguais)
   const memories = [
     "✨ Onde tudo começou", "☕ Nosso café em Jaguaruna", "📍 Conhecendo Jaguaruna",
     "🏡 Se mudou pra Blumenau", "💍 Ficamos noivos", "☕ Dias simples, amor grande",
@@ -616,123 +656,116 @@
           <div class="caption" data-hover="${hoverExtra}">${captionText}</div>
         </div>
       `;
-
-      const polaroidDiv = entry.querySelector('.polaroid');
-      if (polaroidDiv) {
-        polaroidDiv.addEventListener('click', function(e) {
-          e.stopPropagation();
-          this.classList.add('touched');
-          setTimeout(() => this.classList.remove('touched'), 200);
-        });
-      }
       timelineContainer.appendChild(entry);
     }
   }
 
-  // Confetes
+  // Pétalas de rosa
+  function criarPetalas() {
+    const petals = ['🌸', '🌹', '💮', '🏵️', '🌺', '🌷', '💐', '🥀'];
+    for (let i = 0; i < 40; i++) {
+      setTimeout(() => {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.fontSize = (Math.random() * 15 + 12) + 'px';
+        petal.style.animationDuration = Math.random() * 4 + 3 + 's';
+        petal.style.animationDelay = Math.random() * 2 + 's';
+        document.body.appendChild(petal);
+        setTimeout(() => petal.remove(), 6000);
+      }, i * 80);
+    }
+  }
+
   function criarConfete() {
-    const colors = ['#ff6b8a', '#ff9a5e', '#ffb7c7', '#e66b8a', '#ffd700', '#ff88aa'];
-    const confetti = document.createElement('div');
-    confetti.classList.add('confetti');
-    confetti.style.left = Math.random() * 100 + '%';
-    confetti.style.width = Math.random() * 10 + 5 + 'px';
-    confetti.style.height = confetti.style.width;
-    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-    confetti.style.animationDuration = Math.random() * 2 + 1.5 + 's';
-    document.body.appendChild(confetti);
-    setTimeout(() => confetti.remove(), 3000);
+    const colors = ['#ff6b8a', '#ff9a5e', '#ffb7c7', '#e66b8a', '#ffd700', '#ff88aa', '#ff69b4', '#ff1493'];
+    for (let i = 0; i < 120; i++) {
+      setTimeout(() => {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.width = Math.random() * 12 + 5 + 'px';
+        confetti.style.height = confetti.style.width;
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDuration = Math.random() * 2.5 + 1.5 + 's';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3000);
+      }, i * 20);
+    }
   }
 
-  // ===== ÁUDIO =====
-const audioElement = document.getElementById('surpriseAudio');
+  // Áudio
+  const audioElement = document.getElementById('surpriseAudio');
 
-function playAudio() {
-  if (!audioElement) return;
+  function playAudio() {
+    if (!audioElement) return;
+    audioElement.src = "/20anos/viversemar.mp3";
+    audioElement.load();
+    audioElement.currentTime = 0;
+    audioElement.play().catch(err => console.log("Erro ao tocar áudio:", err));
+  }
 
-  audioElement.src = "/20anos/viversemar.mp3";
-  audioElement.load();
-  audioElement.currentTime = 0;
+  function stopAudio() {
+    if (!audioElement) return;
+    audioElement.pause();
+    audioElement.currentTime = 0;
+  }
 
-  audioElement.play()
-    .then(() => console.log("🎵 Música tocando"))
-    .catch(err => console.log("Erro ao tocar áudio:", err));
-}
-
-function stopAudio() {
-  if (!audioElement) return;
-
-  audioElement.pause();
-  audioElement.currentTime = 0;
-}
-
-
-// ===== MODAL DA LETRA =====
-const lyricsModal = document.getElementById('lyricsModal');
-const closeLyricsBtn = document.getElementById('closeLyricsBtn');
-
-
-function showLyricsModal() {
-  lyricsModal.classList.add('active');
-  playAudio();
-}
-
-
-function closeLyricsModal() {
-  lyricsModal.classList.remove('active');
-  stopAudio();
-}
-
-  // Botão surpresa: abre o modal com a letra e começa a música
+  // Modal
+  const lyricsModal = document.getElementById('lyricsModal');
+  const closeLyricsBtn = document.getElementById('closeLyricsBtn');
   const surpriseBtn = document.getElementById('surpriseBtn');
-  if (surpriseBtn) {
-    surpriseBtn.addEventListener('click', () => {
-      showLyricsModal();
-      for (let i = 0; i < 100; i++) setTimeout(() => criarConfete(), i * 25);
-      const bigHeart = document.querySelector('.heart-big');
-      if (bigHeart) {
-        bigHeart.style.animation = 'none';
-        setTimeout(() => bigHeart.style.animation = 'softPulse 2s infinite ease-in-out', 10);
-      }
-    });
+
+  function showSurprise() {
+    lyricsModal.classList.add('active');
+    playAudio();
+    criarPetalas();
+    criarConfete();
+    
+    // Animação do coração grande
+    const bigHeart = document.querySelector('.heart-big');
+    if (bigHeart) {
+      bigHeart.style.animation = 'none';
+      setTimeout(() => bigHeart.style.animation = 'softPulse 2s infinite ease-in-out', 50);
+    }
+    
+    // Animar o botão no momento do clique
+    surpriseBtn.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      surpriseBtn.style.transform = '';
+    }, 200);
   }
 
-  // Fechar modal da letra e parar música
+  function closeLyricsModal() {
+    lyricsModal.classList.remove('active');
+    stopAudio();
+  }
+
+  if (surpriseBtn) {
+    surpriseBtn.addEventListener('click', showSurprise);
+  }
+
   if (closeLyricsBtn) {
     closeLyricsBtn.addEventListener('click', closeLyricsModal);
   }
   
-  // Clicar fora do modal também fecha
   lyricsModal.addEventListener('click', (e) => {
     if (e.target === lyricsModal) {
       closeLyricsModal();
     }
   });
 
-  // Observer para animações da timeline
+  // Intersection Observer
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('in-view'); });
+    entries.forEach(entry => { 
+      if (entry.isIntersecting) entry.target.classList.add('in-view'); 
+    });
   }, { threshold: 0.2 });
+  
   document.querySelectorAll('.entry').forEach(el => observer.observe(el));
-  setTimeout(() => {
-    document.querySelectorAll('.entry').forEach(el => {
-      if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('in-view');
-    });
-  }, 200);
   
-  // Touch nas polaroids
-  if ('ontouchstart' in window) {
-    document.querySelectorAll('.polaroid').forEach(p => {
-      p.addEventListener('touchstart', function(e) {
-        e.stopPropagation();
-        this.classList.add('touched');
-      });
-      p.addEventListener('touchend', function() {
-        setTimeout(() => this.classList.remove('touched'), 200);
-      });
-    });
-  }
-  
-  console.log("%c💖 20 anos, Cláudia! Clique no botão surpresa 💖", "color: #e6577c; font-size: 14px");
+  console.log("%c💖 20 anos, Cláudia! Clique no botão Surpresa no canto inferior direito 💖", "color: #e6577c; font-size: 14px; font-weight: bold;");
 </script>
 </body>
 </html>
