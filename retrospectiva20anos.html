@@ -245,6 +245,7 @@ header, .timeline, .finale {
     opacity: 1;
   }
 
+  /* Finale com poema */
   .finale {
     z-index: 2;
     margin-top: 50px;
@@ -276,6 +277,7 @@ header, .timeline, .finale {
     margin: 6px 0;
   }
 
+  /* Poema na tela principal */
   .poem {
     font-family: 'Georgia', serif;
     font-size: 0.95rem;
@@ -297,6 +299,115 @@ header, .timeline, .finale {
     font-size: 1.3rem;
     color: #e66b8a;
     margin-top: 12px;
+  }
+
+  /* ===== LETRA FLUTUANTE (TOUCH/HOVER) ===== */
+  .lyrics-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(12px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .lyrics-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lyrics-card {
+    background: linear-gradient(145deg, #fff5f8, #ffeef4);
+    max-width: 90%;
+    width: 400px;
+    max-height: 80vh;
+    border-radius: 48px;
+    padding: 28px 24px;
+    box-shadow: 0 30px 50px rgba(200, 70, 100, 0.5), 0 0 0 2px rgba(255, 200, 220, 0.8);
+    text-align: center;
+    overflow-y: auto;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+
+  .lyrics-overlay.active .lyrics-card {
+    transform: scale(1);
+  }
+
+  .lyrics-card::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .lyrics-card::-webkit-scrollbar-track {
+    background: #ffe0e8;
+    border-radius: 10px;
+  }
+
+  .lyrics-card::-webkit-scrollbar-thumb {
+    background: #e66b8a;
+    border-radius: 10px;
+  }
+
+  .lyrics-title {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 2rem;
+    background: linear-gradient(135deg, #e6577c, #ff9a5e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 16px;
+  }
+
+  .lyrics-content {
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #b84c6e;
+    text-align: center;
+  }
+
+  .lyrics-content p {
+    margin: 10px 0;
+  }
+
+  .lyrics-content .chorus {
+    font-weight: bold;
+    color: #e6577c;
+    margin: 16px 0;
+  }
+
+  .tap-hint {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(230, 107, 138, 0.9);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-family: 'Georgia', serif;
+    z-index: 15;
+    opacity: 0;
+    animation: fadeInOut 3s ease forwards;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-10px); visibility: hidden; }
   }
 
   @keyframes softPulse {
@@ -486,7 +597,6 @@ header, .timeline, .finale {
     }
   }
 
-  /* Player de música escondido */
   .hidden-audio {
     display: none;
   }
@@ -544,6 +654,21 @@ header, .timeline, .finale {
     .modal-container h3 {
       font-size: 1.8rem;
     }
+
+    .lyrics-card {
+      padding: 20px 16px;
+      max-height: 70vh;
+    }
+
+    .lyrics-content {
+      font-size: 0.9rem;
+    }
+
+    .tap-hint {
+      font-size: 0.7rem;
+      bottom: 70px;
+      white-space: nowrap;
+    }
   }
 
   .frame span.placeholder-txt {
@@ -564,11 +689,26 @@ header, .timeline, .finale {
 </head>
 <body>
 
-<!-- Áudio da música (escondido) -->
-<audio id="surpriseAudio" class="hidden-audio" preload="auto">
+<!-- Áudio da música -->
+<audio id="surpriseAudio" class="hidden-audio" preload="auto" loop>
   <source src="viversemar.mp3" type="audio/mpeg">
   Seu navegador não suporta áudio.
 </audio>
+
+<!-- OVERLAY DA LETRA (aparece ao tocar/clicar na tela) -->
+<div class="lyrics-overlay" id="lyricsOverlay">
+  <div class="lyrics-card">
+    <div class="lyrics-title">🎵 Viver Sem Ar 🎵</div>
+    <div class="lyrics-content">
+      <p>Como eu queria poder viver sem ar<br>Mas não consigo, sinto que vou morrer<br>Vinte anos se passaram ao seu lado<br>Claudia, cada dia eu só quero você</p>
+      <p>Como um peixe não consegue sem a água<br>Como um pássaro não voa sem ter asas<br>Nas curvas da vida você me deu a mão<br>Superamos tempestades, Claudia</p>
+      <p class="chorus">♥ Mas eu não posso, sinto que morro ♥<br>♥ Estou afogando sem o seu amor ♥<br>♥ Te amo hoje, te amo sempre, Claudia ♥<br>♥ Que venham mais vinte, trinta e além ♥</p>
+      <p>Como eu queria poder viver sem água<br>Mas não consigo sem o seu calor<br>Dois corações, uma só direção<br>Cada dia ao seu lado é um lugar especial, Claudia</p>
+      <p class="chorus">♥ Mas eu não posso, sinto que morro ♥<br>♥ Estou afogando sem o seu amor ♥<br>♥ Te amo hoje, te amo sempre, Claudia ♥<br>♥ Minha vida inteira em você se deságua ♥</p>
+      <p>Como eu queria poder viver sem ar...<br>Mas não posso, Claudia...<br>Sem o seu amor... 💕</p>
+    </div>
+  </div>
+</div>
 
 <!-- MODAL ROMÂNTICO -->
 <div class="modal-overlay" id="surpriseModal">
@@ -584,6 +724,9 @@ header, .timeline, .finale {
 </div>
 
 <button class="surprise-btn" id="surpriseBtn">🎁 Surpresa de 20 anos ❤️</button>
+
+<!-- Dica para tocar na tela e ver a letra -->
+<div class="tap-hint" id="tapHint">💡 Toque na tela para ver a letra da música 💡</div>
 
 <header>
   <div class="small">Nossos 💕 20 anos</div>
@@ -767,11 +910,14 @@ header, .timeline, .finale {
 
   // Áudio
   const audioElement = document.getElementById('surpriseAudio');
+  let isAudioPlaying = false;
   
   function playAudio() {
     if (audioElement) {
       audioElement.currentTime = 0;
-      audioElement.play().catch(e => console.log("Áudio não pôde ser reproduzido:", e));
+      audioElement.play().then(() => {
+        isAudioPlaying = true;
+      }).catch(e => console.log("Áudio não pôde ser reproduzido:", e));
     }
   }
 
@@ -779,8 +925,60 @@ header, .timeline, .finale {
     if (audioElement) {
       audioElement.pause();
       audioElement.currentTime = 0;
+      isAudioPlaying = false;
     }
   }
+
+  // ===== LETRA FLUTUANTE (TOUCH/CLICK) =====
+  const lyricsOverlay = document.getElementById('lyricsOverlay');
+  
+  function showLyrics() {
+    lyricsOverlay.classList.add('active');
+  }
+  
+  function hideLyrics() {
+    lyricsOverlay.classList.remove('active');
+  }
+  
+  // Tocar em qualquer lugar da tela mostra a letra (se a música estiver tocando)
+  document.body.addEventListener('touchstart', (e) => {
+    if (isAudioPlaying) {
+      e.preventDefault();
+      showLyrics();
+    }
+  });
+  
+  document.body.addEventListener('touchend', (e) => {
+    if (isAudioPlaying) {
+      hideLyrics();
+    }
+  });
+  
+  // Para clique com mouse em desktop
+  document.body.addEventListener('mousedown', () => {
+    if (isAudioPlaying) {
+      showLyrics();
+    }
+  });
+  
+  document.body.addEventListener('mouseup', () => {
+    if (isAudioPlaying) {
+      hideLyrics();
+    }
+  });
+  
+  // Impedir que o overlay feche ao clicar dentro do card
+  lyricsOverlay.addEventListener('touchstart', (e) => {
+    if (e.target === lyricsOverlay) {
+      hideLyrics();
+    }
+  });
+  
+  lyricsOverlay.addEventListener('click', (e) => {
+    if (e.target === lyricsOverlay) {
+      hideLyrics();
+    }
+  });
 
   // Modal control
   const modalOverlay = document.getElementById('surpriseModal');
@@ -797,6 +995,7 @@ header, .timeline, .finale {
   function closeModal() {
     modalOverlay.classList.remove('active');
     stopAudio(); // Para a música ao fechar o modal
+    hideLyrics(); // Garante que a letra suma também
   }
 
   if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
@@ -826,6 +1025,7 @@ header, .timeline, .finale {
     });
   }
 
+  // Intersection Observer
   const observerOptions = {
     threshold: 0.2,
     rootMargin: "0px 0px -10px 0px"
@@ -852,9 +1052,11 @@ header, .timeline, .finale {
     });
   }, 200);
   
+  // Suporte para touch nas polaroids
   if ('ontouchstart' in window) {
     document.querySelectorAll('.polaroid').forEach(p => {
-      p.addEventListener('touchstart', function() {
+      p.addEventListener('touchstart', function(e) {
+        e.stopPropagation();
         this.classList.add('touched');
       });
       p.addEventListener('touchend', function() {
@@ -863,7 +1065,7 @@ header, .timeline, .finale {
     });
   }
   
-  console.log("%c💖 20 anos juntos, Claudia! Cada momento é especial. 💖", "color: #e6577c; font-size: 14px; font-family: monospace;");
+  console.log("%c💖 20 anos juntos, Claudia! Toque na tela para ver a letra da música! 💖", "color: #e6577c; font-size: 14px; font-family: monospace;");
 </script>
 </body>
 </html>
