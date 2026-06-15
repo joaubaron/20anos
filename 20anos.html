@@ -883,10 +883,11 @@ bgAudio.loop = true;
 bgAudio.volume = 0.18;
 
 function playBg() { bgAudio.play().catch(() => {}); }
+function pauseBg() { bgAudio.pause(); }
 function stopBg() { bgAudio.pause(); bgAudio.currentTime = 0; }
 
 function playAudio() {
-  stopBg();
+  pauseBg();
   audio.src = 'viversemar.mp3';
   audio.load();
   audio.currentTime = 0;
