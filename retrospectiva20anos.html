@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>20 Anos Juntos | Nossa História</title>
+<title>20 Anos Juntos | Nossa História - Claudia</title>
 <style>
   * {
     margin: 0;
@@ -81,19 +81,6 @@ header, .timeline, .finale {
     text-shadow: 2px 2px 6px rgba(255, 200, 220, 0.5);
   }
 
-  header h1 {
-    font-size: 1rem;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    background: linear-gradient(90deg, #ff92b0, #ffbc7a);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-weight: 600;
-    margin-top: 5px;
-  }
-
   .timeline {
     position: relative;
     width: 100%;
@@ -159,14 +146,12 @@ header, .timeline, .finale {
     --rot: 1.5deg;
   }
 
-  /* Efeito hover melhorado */
   .polaroid:hover {
     transform: rotate(0deg) scale(1.03);
     box-shadow: 0 28px 40px -12px rgba(200, 70, 100, 0.4);
     border-color: #ff9aba;
   }
 
-  /* Efeito de brilho na imagem ao passar mouse */
   .polaroid:hover .frame::after {
     content: "";
     position: absolute;
@@ -176,13 +161,11 @@ header, .timeline, .finale {
     border-radius: 12px;
   }
 
-  /* Efeito sutil de zoom na imagem */
   .polaroid:hover .frame img {
     transform: scale(1.04);
     transition: transform 0.4s ease-out;
   }
 
-  /* Efeito de clique ativo */
   .polaroid:active {
     transform: rotate(0deg) scale(0.98);
     transition: transform 0.08s;
@@ -215,7 +198,6 @@ header, .timeline, .finale {
     transition: transform 0.4s ease-out;
   }
 
-  /* DATA NO TOPO DA FOTO */
   .photo-date {
     position: absolute;
     top: 10px;
@@ -247,7 +229,6 @@ header, .timeline, .finale {
     transition: all 0.2s;
   }
 
-  /* Legenda extra que aparece no hover */
   .caption::after {
     content: attr(data-hover);
     display: block;
@@ -264,7 +245,6 @@ header, .timeline, .finale {
     opacity: 1;
   }
 
-  /* Finale com poema */
   .finale {
     z-index: 2;
     margin-top: 50px;
@@ -325,7 +305,6 @@ header, .timeline, .finale {
     100% { transform: scale(1); opacity: 0.9; text-shadow: 0 0 2px #ffb7c7; }
   }
 
-  /* Botão surpresa */
   .surprise-btn {
     position: fixed;
     bottom: 20px;
@@ -358,7 +337,6 @@ header, .timeline, .finale {
     transform: scale(0.98);
   }
 
-  /* ===== MODAL ROMÂNTICO ===== */
   .modal-overlay {
     position: fixed;
     top: 0;
@@ -478,7 +456,6 @@ header, .timeline, .finale {
     color: white;
   }
 
-  /* Animações de entrada */
   .entry {
     opacity: 0;
     transform: translateY(28px);
@@ -490,7 +467,6 @@ header, .timeline, .finale {
     transform: translateY(0);
   }
 
-  /* Efeito de confetes (surpresa) */
   .confetti {
     position: fixed;
     width: 10px;
@@ -508,6 +484,11 @@ header, .timeline, .finale {
       transform: translateY(100vh) rotate(360deg);
       opacity: 0;
     }
+  }
+
+  /* Player de música escondido */
+  .hidden-audio {
+    display: none;
   }
 
   @media (max-width: 560px) {
@@ -583,6 +564,12 @@ header, .timeline, .finale {
 </head>
 <body>
 
+<!-- Áudio da música (escondido) -->
+<audio id="surpriseAudio" class="hidden-audio" preload="auto">
+  <source src="viversemar.mp3" type="audio/mpeg">
+  Seu navegador não suporta áudio.
+</audio>
+
 <!-- MODAL ROMÂNTICO -->
 <div class="modal-overlay" id="surpriseModal">
   <div class="modal-container">
@@ -600,7 +587,7 @@ header, .timeline, .finale {
 
 <header>
   <div class="small">Nossos 💕 20 anos</div>
-  <div class="small" style="font-size: 1.8rem; margin-top: 8px;">❤️ Juntos e fortes ❤️</div>
+  <div class="small" style="font-size: 1.8rem; margin-top: 8px;">❤️ Claudia, juntos e fortes ❤️</div>
 </header>
 
 <div class="timeline" id="timeline"></div>
@@ -609,22 +596,36 @@ header, .timeline, .finale {
   <span class="heart-big">❤️</span>
   <h2>Vinte Anos</h2>
   <div class="poem">
-    <p>Dois corações, uma só direção,</p>
-    <p>Vinte anos de amor e união.</p>
-    <p>Das primeiras risadas aos planos no ar,</p>
-    <p>Cada dia ao seu lado é um lugar especial.</p>
+    <p>Como eu queria poder viver sem ar</p>
+    <p>Mas não consigo, sinto que vou morrer</p>
+    <p>Vinte anos se passaram ao seu lado</p>
+    <p>Claudia, cada dia eu só quero você</p>
     <br>
-    <p>Nas curvas da vida, me deste as mãos,</p>
-    <p>Superamos tempestades, secamos os chãos.</p>
-    <p>Teu sorriso ainda é meu amanhecer,</p>
-    <p>Teu abraço, meu porto, meu bem querer.</p>
+    <p>Como um peixe não consegue sem a água</p>
+    <p>Como um pássaro não voa sem ter asas</p>
+    <p>Nas curvas da vida você me deu a mão</p>
+    <p>Superamos tempestades, Claudia</p>
     <br>
-    <p>Que venham mais 20, 30, e além,</p>
-    <p>Com a mesma chama que nunca se apaga.</p>
-    <p>Te amo hoje, amanhã, sempre,</p>
-    <p>Minha vida inteira em você se deságua.</p>
+    <p>Mas eu não posso, sinto que morro</p>
+    <p>Estou afogando sem o seu amor</p>
+    <p>Te amo hoje, te amo sempre, Claudia</p>
+    <p>Que venham mais vinte, trinta e além</p>
+    <br>
+    <p>Como eu queria poder viver sem água</p>
+    <p>Mas não consigo sem o seu calor</p>
+    <p>Dois corações, uma só direção</p>
+    <p>Cada dia ao seu lado é um lugar especial, Claudia</p>
+    <br>
+    <p>Mas eu não posso, sinto que morro</p>
+    <p>Estou afogando sem o seu amor</p>
+    <p>Te amo hoje, te amo sempre, Claudia</p>
+    <p>Minha vida inteira em você se deságua</p>
+    <br>
+    <p>Como eu queria poder viver sem ar...</p>
+    <p>Mas não posso, Claudia...</p>
+    <p>Sem o seu amor...</p>
   </div>
-  <p class="signature">Com amor, para sempre seu/sua ❤️</p>
+  <p class="signature">Com amor, para sempre sua ❤️</p>
 </div>
 
 <script>
@@ -652,7 +653,6 @@ header, .timeline, .finale {
     "❤️ Conseguimos!"
   ];
 
-  // Textos que aparecem no hover (legenda extra)
   const hoverTexts = [
     "💭 primeiro olhar",
     "💭 risadas sem fim",
@@ -676,7 +676,6 @@ header, .timeline, .finale {
     "💭 juntos e fortes!"
   ];
 
-  // Datas
   const datesList = [
     "05/04/2007",
     "06/04/2007",
@@ -700,7 +699,6 @@ header, .timeline, .finale {
     "✨2027 - 20 anos ✨"
   ];
 
-  // Mensagens românticas para o modal surpresa
   const surpriseMessages = [
     "💝 20 anos juntos! Você é o amor da minha vida! 💝",
     "🌟 Cada dia ao seu lado é um presente. Te amo mais que tudo! 🌟",
@@ -750,7 +748,6 @@ header, .timeline, .finale {
     }
   }
 
-  // Função para criar confetes
   function criarConfete() {
     const colors = ['#ff6b8a', '#ff9a5e', '#ffb7c7', '#e66b8a', '#ffd700', '#ff88aa', '#ff6b9d'];
     const confetti = document.createElement('div');
@@ -768,6 +765,23 @@ header, .timeline, .finale {
     }, 3000);
   }
 
+  // Áudio
+  const audioElement = document.getElementById('surpriseAudio');
+  
+  function playAudio() {
+    if (audioElement) {
+      audioElement.currentTime = 0;
+      audioElement.play().catch(e => console.log("Áudio não pôde ser reproduzido:", e));
+    }
+  }
+
+  function stopAudio() {
+    if (audioElement) {
+      audioElement.pause();
+      audioElement.currentTime = 0;
+    }
+  }
+
   // Modal control
   const modalOverlay = document.getElementById('surpriseModal');
   const modalMessageText = document.getElementById('modalMessageText');
@@ -777,10 +791,12 @@ header, .timeline, .finale {
   function showSurpriseModal(message) {
     modalMessageText.innerHTML = message;
     modalOverlay.classList.add('active');
+    playAudio(); // Toca a música ao abrir o modal
   }
 
   function closeModal() {
     modalOverlay.classList.remove('active');
+    stopAudio(); // Para a música ao fechar o modal
   }
 
   if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
@@ -796,12 +812,10 @@ header, .timeline, .finale {
       const randomMsg = surpriseMessages[Math.floor(Math.random() * surpriseMessages.length)];
       showSurpriseModal(randomMsg);
       
-      // Confetes
       for (let i = 0; i < 100; i++) {
         setTimeout(() => criarConfete(), i * 25);
       }
       
-      // Efeito de pulsação no coração grande
       const bigHeart = document.querySelector('.heart-big');
       if (bigHeart) {
         bigHeart.style.animation = 'none';
@@ -812,7 +826,6 @@ header, .timeline, .finale {
     });
   }
 
-  // Intersection Observer para animação suave
   const observerOptions = {
     threshold: 0.2,
     rootMargin: "0px 0px -10px 0px"
@@ -839,7 +852,6 @@ header, .timeline, .finale {
     });
   }, 200);
   
-  // Suporte para touch
   if ('ontouchstart' in window) {
     document.querySelectorAll('.polaroid').forEach(p => {
       p.addEventListener('touchstart', function() {
@@ -851,7 +863,7 @@ header, .timeline, .finale {
     });
   }
   
-  console.log("%c💖 20 anos juntos! Cada momento é especial. 💖", "color: #e6577c; font-size: 14px; font-family: monospace;");
+  console.log("%c💖 20 anos juntos, Claudia! Cada momento é especial. 💖", "color: #e6577c; font-size: 14px; font-family: monospace;");
 </script>
 </body>
 </html>
