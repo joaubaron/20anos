@@ -645,36 +645,44 @@
     setTimeout(() => confetti.remove(), 3000);
   }
 
-  // Áudio
-  const audioElement = document.getElementById('surpriseAudio');
-  
-  function playAudio() {
-    if (audioElement) {
-      audioElement.currentTime = 0;
-      audioElement.play().catch(e => console.log("Áudio não pôde ser reproduzido:", e));
-    }
-  }
+  // ===== ÁUDIO =====
+const audioElement = document.getElementById('surpriseAudio');
 
-  function stopAudio() {
-    if (audioElement) {
-      audioElement.pause();
-      audioElement.currentTime = 0;
-    }
-  }
+function playAudio() {
+  if (!audioElement) return;
 
-  // Elementos do modal de letra
-  const lyricsModal = document.getElementById('lyricsModal');
-  const closeLyricsBtn = document.getElementById('closeLyricsBtn');
+  audioElement.src = "/20anos/viversemar.mp3";
+  audioElement.load();
+  audioElement.currentTime = 0;
 
-  function showLyricsModal() {
-    lyricsModal.classList.add('active');
-    playAudio();
-  }
+  audioElement.play()
+    .then(() => console.log("🎵 Música tocando"))
+    .catch(err => console.log("Erro ao tocar áudio:", err));
+}
 
-  function closeLyricsModal() {
-    lyricsModal.classList.remove('active');
-    stopAudio();
-  }
+function stopAudio() {
+  if (!audioElement) return;
+
+  audioElement.pause();
+  audioElement.currentTime = 0;
+}
+
+
+// ===== MODAL DA LETRA =====
+const lyricsModal = document.getElementById('lyricsModal');
+const closeLyricsBtn = document.getElementById('closeLyricsBtn');
+
+
+function showLyricsModal() {
+  lyricsModal.classList.add('active');
+  playAudio();
+}
+
+
+function closeLyricsModal() {
+  lyricsModal.classList.remove('active');
+  stopAudio();
+}
 
   // Botão surpresa: abre o modal com a letra e começa a música
   const surpriseBtn = document.getElementById('surpriseBtn');
