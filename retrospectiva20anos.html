@@ -454,9 +454,12 @@
     }
   }
 
-  .hidden-audio {
-    display: none;
-  }
+ .hidden-audio {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
 
   @media (max-width: 560px) {
     body {
