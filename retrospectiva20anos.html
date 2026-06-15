@@ -11,7 +11,6 @@
     box-sizing: border-box;
   }
 
-  /* ===== FUNDO ROMÂNTICO ESTÁTICO ===== */
   body {
     font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
     background: #ffe6f0;
@@ -51,10 +50,10 @@
     z-index: 0;
   }
 
-header, .timeline, .finale {
+  header, .timeline, .finale {
     position: relative;
     z-index: 2;
-}
+  }
 
   header {
     text-align: center;
@@ -245,7 +244,6 @@ header, .timeline, .finale {
     opacity: 1;
   }
 
-  /* Finale com poema */
   .finale {
     z-index: 2;
     margin-top: 50px;
@@ -277,7 +275,6 @@ header, .timeline, .finale {
     margin: 6px 0;
   }
 
-  /* Poema na tela principal */
   .poem {
     font-family: 'Georgia', serif;
     font-size: 0.95rem;
@@ -301,14 +298,19 @@ header, .timeline, .finale {
     margin-top: 12px;
   }
 
-  /* ===== LETRA FLUTUANTE (TOUCH/HOVER) ===== */
+  @keyframes softPulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.08); opacity: 1; }
+  }
+
+  /* ===== LETRA FLUTUANTE ===== */
   .lyrics-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(12px);
     z-index: 2000;
     display: flex;
@@ -332,7 +334,7 @@ header, .timeline, .finale {
     max-height: 80vh;
     border-radius: 48px;
     padding: 28px 24px;
-    box-shadow: 0 30px 50px rgba(200, 70, 100, 0.5), 0 0 0 2px rgba(255, 200, 220, 0.8);
+    box-shadow: 0 30px 50px rgba(200, 70, 100, 0.5);
     text-align: center;
     overflow-y: auto;
     transform: scale(0.9);
@@ -410,12 +412,6 @@ header, .timeline, .finale {
     100% { opacity: 0; transform: translateX(-50%) translateY(-10px); visibility: hidden; }
   }
 
-  @keyframes softPulse {
-    0% { transform: scale(1); opacity: 0.9; text-shadow: 0 0 2px #ffb7c7; }
-    50% { transform: scale(1.08); opacity: 1; text-shadow: 0 0 12px #ff90b0; }
-    100% { transform: scale(1); opacity: 0.9; text-shadow: 0 0 2px #ffb7c7; }
-  }
-
   .surprise-btn {
     position: fixed;
     bottom: 20px;
@@ -441,11 +437,6 @@ header, .timeline, .finale {
   .surprise-btn:hover {
     background: linear-gradient(135deg, #c04e6e, #b83a5a);
     transform: scale(1.05);
-    box-shadow: 0 8px 22px rgba(0,0,0,0.3);
-  }
-
-  .surprise-btn:active {
-    transform: scale(0.98);
   }
 
   .modal-overlay {
@@ -480,7 +471,7 @@ header, .timeline, .finale {
     transform: scale(0.7);
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.34, 1.3, 0.55, 1);
-    box-shadow: 0 30px 50px rgba(200, 70, 100, 0.4), 0 0 0 2px rgba(255, 200, 220, 0.8);
+    box-shadow: 0 30px 50px rgba(200, 70, 100, 0.4);
     position: relative;
     border: 1px solid rgba(255, 255, 200, 0.7);
   }
@@ -533,16 +524,11 @@ header, .timeline, .finale {
     font-weight: bold;
     transition: all 0.2s ease;
     margin-top: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
 
   .modal-btn:hover {
     transform: scale(1.05);
     background: linear-gradient(135deg, #c04e6e, #b83a5a);
-  }
-
-  .modal-btn:active {
-    transform: scale(0.98);
   }
 
   .close-modal-x {
@@ -647,17 +633,8 @@ header, .timeline, .finale {
       padding: 28px 20px 32px;
     }
 
-    .modal-message-text {
-      font-size: 1rem;
-    }
-
-    .modal-container h3 {
-      font-size: 1.8rem;
-    }
-
     .lyrics-card {
       padding: 20px 16px;
-      max-height: 70vh;
     }
 
     .lyrics-content {
@@ -689,13 +666,11 @@ header, .timeline, .finale {
 </head>
 <body>
 
-<!-- Áudio da música -->
-<audio id="surpriseAudio" class="hidden-audio" preload="auto" loop>
+<audio id="surpriseAudio" class="hidden-audio" preload="auto">
   <source src="viversemar.mp3" type="audio/mpeg">
-  Seu navegador não suporta áudio.
 </audio>
 
-<!-- OVERLAY DA LETRA (aparece ao tocar/clicar na tela) -->
+<!-- LETRA FLUTUANTE -->
 <div class="lyrics-overlay" id="lyricsOverlay">
   <div class="lyrics-card">
     <div class="lyrics-title">🎵 Viver Sem Ar 🎵</div>
@@ -710,7 +685,7 @@ header, .timeline, .finale {
   </div>
 </div>
 
-<!-- MODAL ROMÂNTICO -->
+<!-- MODAL -->
 <div class="modal-overlay" id="surpriseModal">
   <div class="modal-container">
     <div class="close-modal-x" id="closeModalBtn">✕</div>
@@ -725,7 +700,6 @@ header, .timeline, .finale {
 
 <button class="surprise-btn" id="surpriseBtn">🎁 Surpresa de 20 anos ❤️</button>
 
-<!-- Dica para tocar na tela e ver a letra -->
 <div class="tap-hint" id="tapHint">💡 Toque na tela para ver a letra da música 💡</div>
 
 <header>
@@ -772,96 +746,54 @@ header, .timeline, .finale {
 </div>
 
 <script>
-  // Legendas românticas com hover extra
+  // Legendas
   const memories = [
-    "✨ Onde tudo começou",
-    "☕ Nosso café em Jaguaruna",
-    "📍 Conhecendo Jaguaruna",
-    "🏡 Se mudou pra Blumenau",
-    "💍 Ficamos noivos",
-    "☕ Dias simples, amor grande",
-    "🎉 Conhecendo a Oktoberfest",
-    "💒 Finalmente casados",
-    "🤍 Aprendendo um com o outro",
-    "🌹 Aventuras pelo caminho",
-    "🏠 Sempre juntinhos",
-    "💕 Alguém apareceu do nada",
-    "✈️ Viagens",
-    "📸 Grandes memórias",
-    "🍻 Brindando a felicidade",
-    "🍻 Mais Oktoberfest",
-    "🤞 Inseparáveis",
-    "⭐ Companheiros de sempre",
-    "⏳ Vamos conseguir...",
-    "❤️ Conseguimos!"
+    "✨ Onde tudo começou", "☕ Nosso café em Jaguaruna", "📍 Conhecendo Jaguaruna",
+    "🏡 Se mudou pra Blumenau", "💍 Ficamos noivos", "☕ Dias simples, amor grande",
+    "🎉 Conhecendo a Oktoberfest", "💒 Finalmente casados", "🤍 Aprendendo um com o outro",
+    "🌹 Aventuras pelo caminho", "🏠 Sempre juntinhos", "💕 Alguém apareceu do nada",
+    "✈️ Viagens", "📸 Grandes memórias", "🍻 Brindando a felicidade",
+    "🍻 Mais Oktoberfest", "🤞 Inseparáveis", "⭐ Companheiros de sempre",
+    "⏳ Vamos conseguir...", "❤️ Conseguimos!"
   ];
 
   const hoverTexts = [
-    "💭 primeiro olhar",
-    "💭 risadas sem fim",
-    "💭 descobrindo o mundo juntos",
-    "💭 um novo começo",
-    "💭 o sim mais lindo",
-    "💭 felicidade simples",
-    "💭 dança e cerveja",
-    "💭 sonho realizado",
-    "💭 crescendo juntos",
-    "💭 de mãos dadas",
-    "💭 nosso lar",
-    "💭 melhor surpresa",
-    "💭 aproveitando cada segundo",
-    "💭 histórias pra contar",
-    "💭 chope nunca faltou",
-    "💭 prost! mais um ano",
-    "💭 almas gêmeas",
-    "💭 pra toda vida",
-    "💭 quase lá",
-    "💭 juntos e fortes!"
+    "💭 primeiro olhar", "💭 risadas sem fim", "💭 descobrindo o mundo juntos",
+    "💭 um novo começo", "💭 o sim mais lindo", "💭 felicidade simples",
+    "💭 dança e cerveja", "💭 sonho realizado", "💭 crescendo juntos",
+    "💭 de mãos dadas", "💭 nosso lar", "💭 melhor surpresa",
+    "💭 aproveitando cada segundo", "💭 histórias pra contar", "💭 chope nunca faltou",
+    "💭 prost! mais um ano", "💭 almas gêmeas", "💭 pra toda vida",
+    "💭 quase lá", "💭 juntos e fortes!"
   ];
 
   const datesList = [
-    "05/04/2007",
-    "06/04/2007",
-    "07/04/2007",
-    "05/06/2007",
-    "05/08/2007",
-    "08/08/2008",
-    "14/10/2009",
-    "03/11/2010",
-    "25/12/2012",
-    "30/04/2013",
-    "11/11/2014",
-    "01/06/2015",
-    "20/01/2019",
-    "07/07/2020",
-    "09/09/2021",
-    "13/10/2022",
-    "24/12/2023",
-    "10/06/2025",
-    "21/01/2026",
-    "✨2027 - 20 anos ✨"
+    "05/04/2007", "06/04/2007", "07/04/2007", "05/06/2007", "05/08/2007",
+    "08/08/2008", "14/10/2009", "03/11/2010", "25/12/2012", "30/04/2013",
+    "11/11/2014", "01/06/2015", "20/01/2019", "07/07/2020", "09/09/2021",
+    "13/10/2022", "24/12/2023", "10/06/2025", "21/01/2026", "✨2027 - 20 anos ✨"
   ];
 
   const surpriseMessages = [
     "💝 20 anos juntos! Você é o amor da minha vida! 💝",
     "🌟 Cada dia ao seu lado é um presente. Te amo mais que tudo! 🌟",
-    "💕 Nossa história é a mais linda que eu poderia sonhar! E ainda tem muito mais pela frente! 💕",
-    "🎉 Parabéns pra nós! 20 anos de cumplicidade, risadas e amor verdadeiro! 🎉",
-    "❤️ Você transformou minha vida completamente. Sou tão grato(a) por ter você! ❤️",
-    "🌹 20 anos e ainda sinto borboletas no estômago quando te vejo. Te amo! 🌹",
-    "✨ Você é minha alma gêmea, meu porto seguro, minha casa. Feliz 20 anos, meu amor! ✨"
+    "💕 Nossa história é a mais linda que eu poderia sonhar! 💕",
+    "🎉 Parabéns pra nós! 20 anos de cumplicidade e amor! 🎉",
+    "❤️ Você transformou minha vida. Sou tão grato(a) por ter você! ❤️",
+    "🌹 20 anos e ainda sinto borboletas no estômago! 🌹",
+    "✨ Você é minha alma gêmea. Feliz 20 anos, meu amor! ✨"
   ];
 
+  // Timeline
   const timelineContainer = document.getElementById('timeline');
   if (timelineContainer) {
     for (let i = 1; i <= 20; i++) {
       const entry = document.createElement('div');
       entry.className = 'entry';
-
       const heartIcon = i % 3 === 0 ? '💗' : (i % 2 === 0 ? '💖' : '💘');
       const displayDate = datesList[i-1];
-      const captionText = memories[i - 1] || "❤️ Nossa memória";
-      const hoverExtra = hoverTexts[i - 1] || "💭 clique e recorde";
+      const captionText = memories[i - 1];
+      const hoverExtra = hoverTexts[i - 1];
       const imgSrc = `fotos/foto${i}.webp`;
       
       entry.innerHTML = `
@@ -870,7 +802,7 @@ header, .timeline, .finale {
           <div class="frame" id="frame-${i}">
             <div class="photo-date">${displayDate}</div>
             <img src="${imgSrc}" alt="Momento ${i}" loading="lazy" 
-                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'placeholder-txt\\' style=\\'display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; background:#f9e2d6; color:#bb6e88; border-radius:10px;\\'><span>💌 ${captionText.split(' ')[0]} ${i}</span><span style=\\'font-size:0.7rem; margin-top:8px\\'>📸 adicione foto${i}.webp</span></div><div class=\\'photo-date\\' style=\\'position:absolute; top:10px; right:12px;\\'>${displayDate}</div>';">
+                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'placeholder-txt\\'><span>💌 ${captionText.split(' ')[0]} ${i}</span><span>📸 adicione foto${i}.webp</span></div><div class=\\'photo-date\\'>${displayDate}</div>';">
           </div>
           <div class="caption" data-hover="${hoverExtra}">${captionText}</div>
         </div>
@@ -881,18 +813,16 @@ header, .timeline, .finale {
         polaroidDiv.addEventListener('click', function(e) {
           e.stopPropagation();
           this.classList.add('touched');
-          setTimeout(() => {
-            this.classList.remove('touched');
-          }, 200);
+          setTimeout(() => this.classList.remove('touched'), 200);
         });
       }
-
       timelineContainer.appendChild(entry);
     }
   }
 
+  // Confetes
   function criarConfete() {
-    const colors = ['#ff6b8a', '#ff9a5e', '#ffb7c7', '#e66b8a', '#ffd700', '#ff88aa', '#ff6b9d'];
+    const colors = ['#ff6b8a', '#ff9a5e', '#ffb7c7', '#e66b8a', '#ffd700', '#ff88aa'];
     const confetti = document.createElement('div');
     confetti.classList.add('confetti');
     confetti.style.left = Math.random() * 100 + '%';
@@ -900,18 +830,15 @@ header, .timeline, .finale {
     confetti.style.height = confetti.style.width;
     confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
     confetti.style.animationDuration = Math.random() * 2 + 1.5 + 's';
-    confetti.style.animationDelay = Math.random() * 0.5 + 's';
     document.body.appendChild(confetti);
-    
-    setTimeout(() => {
-      confetti.remove();
-    }, 3000);
+    setTimeout(() => confetti.remove(), 3000);
   }
 
   // Áudio
   const audioElement = document.getElementById('surpriseAudio');
   let isAudioPlaying = false;
-  
+  let isModalOpen = false;
+
   function playAudio() {
     if (audioElement) {
       audioElement.currentTime = 0;
@@ -929,58 +856,51 @@ header, .timeline, .finale {
     }
   }
 
-  // ===== LETRA FLUTUANTE (TOUCH/CLICK) =====
+  // Letra flutuante (SÓ funciona se modal estiver FECHADO)
   const lyricsOverlay = document.getElementById('lyricsOverlay');
   
   function showLyrics() {
-    lyricsOverlay.classList.add('active');
+    if (!isModalOpen && isAudioPlaying) {
+      lyricsOverlay.classList.add('active');
+    }
   }
   
   function hideLyrics() {
     lyricsOverlay.classList.remove('active');
   }
-  
-  // Tocar em qualquer lugar da tela mostra a letra (se a música estiver tocando)
+
+  // Toque na tela (SÓ quando modal está fechado)
   document.body.addEventListener('touchstart', (e) => {
-    if (isAudioPlaying) {
-      e.preventDefault();
+    if (!isModalOpen && isAudioPlaying) {
       showLyrics();
     }
   });
   
   document.body.addEventListener('touchend', (e) => {
-    if (isAudioPlaying) {
+    if (!isModalOpen && isAudioPlaying) {
       hideLyrics();
     }
   });
   
-  // Para clique com mouse em desktop
+  // Desktop (mouse)
   document.body.addEventListener('mousedown', () => {
-    if (isAudioPlaying) {
+    if (!isModalOpen && isAudioPlaying) {
       showLyrics();
     }
   });
   
   document.body.addEventListener('mouseup', () => {
-    if (isAudioPlaying) {
+    if (!isModalOpen && isAudioPlaying) {
       hideLyrics();
     }
   });
   
-  // Impedir que o overlay feche ao clicar dentro do card
-  lyricsOverlay.addEventListener('touchstart', (e) => {
-    if (e.target === lyricsOverlay) {
-      hideLyrics();
-    }
-  });
-  
+  // Clicar no overlay da letra fecha
   lyricsOverlay.addEventListener('click', (e) => {
-    if (e.target === lyricsOverlay) {
-      hideLyrics();
-    }
+    if (e.target === lyricsOverlay) hideLyrics();
   });
 
-  // Modal control
+  // Modal
   const modalOverlay = document.getElementById('surpriseModal');
   const modalMessageText = document.getElementById('modalMessageText');
   const closeModalBtn = document.getElementById('closeModalBtn');
@@ -989,13 +909,15 @@ header, .timeline, .finale {
   function showSurpriseModal(message) {
     modalMessageText.innerHTML = message;
     modalOverlay.classList.add('active');
-    playAudio(); // Toca a música ao abrir o modal
+    isModalOpen = true;
+    playAudio();
   }
 
   function closeModal() {
     modalOverlay.classList.remove('active');
-    stopAudio(); // Para a música ao fechar o modal
-    hideLyrics(); // Garante que a letra suma também
+    isModalOpen = false;
+    stopAudio();
+    hideLyrics();
   }
 
   if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
@@ -1010,49 +932,27 @@ header, .timeline, .finale {
     surpriseBtn.addEventListener('click', () => {
       const randomMsg = surpriseMessages[Math.floor(Math.random() * surpriseMessages.length)];
       showSurpriseModal(randomMsg);
-      
-      for (let i = 0; i < 100; i++) {
-        setTimeout(() => criarConfete(), i * 25);
-      }
-      
+      for (let i = 0; i < 100; i++) setTimeout(() => criarConfete(), i * 25);
       const bigHeart = document.querySelector('.heart-big');
       if (bigHeart) {
         bigHeart.style.animation = 'none';
-        setTimeout(() => {
-          bigHeart.style.animation = 'softPulse 2s infinite ease-in-out';
-        }, 10);
+        setTimeout(() => bigHeart.style.animation = 'softPulse 2s infinite ease-in-out', 10);
       }
     });
   }
 
-  // Intersection Observer
-  const observerOptions = {
-    threshold: 0.2,
-    rootMargin: "0px 0px -10px 0px"
-  };
-  
+  // Observer
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-      }
-    });
-  }, observerOptions);
-  
-  document.querySelectorAll('.entry').forEach(el => {
-    observer.observe(el);
-  });
-  
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('in-view'); });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.entry').forEach(el => observer.observe(el));
   setTimeout(() => {
     document.querySelectorAll('.entry').forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        el.classList.add('in-view');
-      }
+      if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('in-view');
     });
   }, 200);
   
-  // Suporte para touch nas polaroids
+  // Touch nas polaroids
   if ('ontouchstart' in window) {
     document.querySelectorAll('.polaroid').forEach(p => {
       p.addEventListener('touchstart', function(e) {
@@ -1065,7 +965,7 @@ header, .timeline, .finale {
     });
   }
   
-  console.log("%c💖 20 anos juntos, Claudia! Toque na tela para ver a letra da música! 💖", "color: #e6577c; font-size: 14px; font-family: monospace;");
+  console.log("%c💖 20 anos, Claudia! Toque na tela para ver a letra da música 💖", "color: #e6577c; font-size: 14px");
 </script>
 </body>
 </html>
