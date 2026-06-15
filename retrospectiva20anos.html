@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>20 Anos Juntos</title>
+<title>20 Anos Juntos | Nossa História</title>
 <style>
   * {
     margin: 0;
@@ -11,7 +11,7 @@
     box-sizing: border-box;
   }
 
-  /* ===== FUNDO ROMÂNTICO ESTÁTICO (sem movimento) ===== */
+  /* ===== FUNDO ROMÂNTICO ESTÁTICO ===== */
   body {
     font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
     background: #ffe6f0;
@@ -51,9 +51,33 @@
     z-index: 0;
   }
 
-  header, .timeline, .finale {
+  header, .timeline, .finale, .counter-container {
     position: relative;
     z-index: 2;
+  }
+
+  .counter-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .counter {
+    display: inline-block;
+    background: rgba(255, 245, 245, 0.7);
+    backdrop-filter: blur(4px);
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #c25274;
+    border: 1px solid rgba(255, 180, 160, 0.5);
+    box-shadow: 0 2px 10px rgba(255, 80, 120, 0.15);
+  }
+
+  .counter span {
+    font-size: 1.1rem;
+    color: #e6577c;
   }
 
   header {
@@ -149,24 +173,49 @@
     border-radius: 18px 18px 22px 22px;
     box-shadow: 0 20px 30px -10px rgba(100, 40, 50, 0.25);
     transform: rotate(var(--rot, -1deg));
-    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: pointer;
     border: 1px solid rgba(255, 210, 190, 0.7);
+    position: relative;
   }
 
   .entry:nth-child(even) .polaroid {
     --rot: 1.5deg;
   }
 
+  /* Efeito hover melhorado */
   .polaroid:hover {
-    transform: rotate(0deg) scale(1.02);
-    box-shadow: 0 24px 36px -12px rgba(200, 70, 100, 0.4);
-    border-color: #ffbfcf;
+    transform: rotate(0deg) scale(1.03);
+    box-shadow: 0 28px 40px -12px rgba(200, 70, 100, 0.4);
+    border-color: #ff9aba;
+  }
+
+  /* Efeito de brilho na imagem ao passar mouse */
+  .polaroid:hover .frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 220, 200, 0.3), transparent 70%);
+    pointer-events: none;
+    border-radius: 12px;
+  }
+
+  /* Efeito sutil de zoom na imagem */
+  .polaroid:hover .frame img {
+    transform: scale(1.04);
+    transition: transform 0.4s ease-out;
+  }
+
+  /* Efeito de clique ativo */
+  .polaroid:active {
+    transform: rotate(0deg) scale(0.98);
+    transition: transform 0.08s;
   }
 
   .polaroid.touched {
-    transform: rotate(0deg) scale(1.03);
-    box-shadow: 0 30px 40px -15px #ff88aa7f;
+    transform: rotate(0deg) scale(0.99);
+    box-shadow: 0 18px 30px -10px #ff88aa7f;
+    transition: transform 0.1s;
   }
 
   .frame {
@@ -187,14 +236,10 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease-out;
   }
 
-  .polaroid:hover .frame img {
-    transform: scale(1.02);
-  }
-
-  /* DATA NO TOPO DA FOTO (dentro da moldura) */
+  /* DATA NO TOPO DA FOTO */
   .photo-date {
     position: absolute;
     top: 10px;
@@ -222,9 +267,28 @@
     color: #ad5a6e;
     font-weight: 500;
     text-shadow: 1px 1px 0 rgba(255, 235, 225, 0.8);
+    position: relative;
+    transition: all 0.2s;
   }
 
-  /* Finale */
+  /* Legenda extra que aparece no hover */
+  .caption::after {
+    content: attr(data-hover);
+    display: block;
+    font-size: 0.7rem;
+    font-family: 'Georgia', serif;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: #e66b8a;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .polaroid:hover .caption::after {
+    opacity: 1;
+  }
+
+  /* Finale com poema */
   .finale {
     z-index: 2;
     margin-top: 50px;
@@ -256,11 +320,27 @@
     margin: 6px 0;
   }
 
-  .finale p {
+  .poem {
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #b55a78;
+    margin: 20px 0;
+    text-align: center;
+    background: rgba(255, 245, 245, 0.6);
+    padding: 20px 16px;
+    border-radius: 40px;
+  }
+
+  .poem p {
+    margin: 8px 0;
+  }
+
+  .signature {
     font-family: 'Brush Script MT', cursive;
-    font-size: 1.9rem;
-    color: #c65c7c;
-    letter-spacing: 1px;
+    font-size: 1.3rem;
+    color: #e66b8a;
+    margin-top: 12px;
   }
 
   @keyframes softPulse {
@@ -269,7 +349,40 @@
     100% { transform: scale(1); opacity: 0.9; text-shadow: 0 0 2px #ffb7c7; }
   }
 
-  /* revelação suave no scroll */
+  /* Botão surpresa */
+  .surprise-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, #e66b8a, #d45a7a);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 20px;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    z-index: 10;
+    transition: all 0.3s ease;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255,255,200,0.3);
+  }
+
+  .surprise-btn:hover {
+    background: linear-gradient(135deg, #c04e6e, #b83a5a);
+    transform: scale(1.05);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.3);
+  }
+
+  .surprise-btn:active {
+    transform: scale(0.98);
+  }
+
+  /* Animações de entrada */
   .entry {
     opacity: 0;
     transform: translateY(28px);
@@ -279,6 +392,27 @@
   .entry.in-view {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* Efeito de confetes (surpresa) */
+  .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #ff6b8a;
+    position: fixed;
+    top: -10px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999;
+    animation: fall linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
   }
 
   @media (max-width: 560px) {
@@ -294,6 +428,10 @@
     .caption {
       font-size: 1rem;
     }
+    
+    .caption::after {
+      font-size: 0.65rem;
+    }
 
     header .small {
       font-size: 2rem;
@@ -304,6 +442,18 @@
       top: 6px;
       right: 8px;
       padding: 3px 8px;
+    }
+    
+    .poem {
+      font-size: 0.85rem;
+      padding: 16px 12px;
+    }
+    
+    .surprise-btn {
+      padding: 8px 16px;
+      font-size: 1rem;
+      bottom: 15px;
+      left: 15px;
     }
   }
 
@@ -321,23 +471,21 @@
     padding: 12px;
     border-radius: 10px;
   }
-
-  .romantic-touch {
-    pointer-events: none;
-    position: fixed;
-    bottom: 12px;
-    right: 12px;
-    font-size: 1.8rem;
-    opacity: 0.3;
-    z-index: 1;
-  }
 </style>
 </head>
 <body>
 
+<button class="surprise-btn" id="surpriseBtn">🎁 Surpresa de 20 anos ❤️</button>
+
+<div class="counter-container">
+  <div class="counter">
+    💕 <span id="daysCounter"></span> dias de amor ininterrupto 💕
+  </div>
+</div>
+
 <header>
   <div class="small">Nossos 💕 20 anos</div>
-  <h1> </h1>
+  <h1> ❤️ Uma história escrita a quatro mãos ❤️</h1>
 </header>
 
 <div class="timeline" id="timeline"></div>
@@ -345,12 +493,28 @@
 <div class="finale">
   <span class="heart-big">❤️</span>
   <h2>Vinte Anos</h2>
-  <p>Juntos e fortes</p>
+  <div class="poem">
+    <p>Dois corações, uma só direção,</p>
+    <p>Vinte anos de amor e união.</p>
+    <p>Das primeiras risadas aos planos no ar,</p>
+    <p>Cada dia ao seu lado é um lugar especial.</p>
+    <br>
+    <p>Nas curvas da vida, me deste as mãos,</p>
+    <p>Superamos tempestades, secamos os chãos.</p>
+    <p>Teu sorriso ainda é meu amanhecer,</p>
+    <p>Teu abraço, meu porto, meu bem querer.</p>
+    <br>
+    <p>Que venham mais 20, 30, e além,</p>
+    <p>Com a mesma chama que nunca se apaga.</p>
+    <p>Te amo hoje, amanhã, sempre,</p>
+    <p>Minha vida inteira em você se deságua.</p>
+  </div>
+  <p class="signature">Com amor, para sempre seu/sua ❤️</p>
 </div>
 
 <script>
-  // Legendas românticas
-const memories = [
+  // Legendas românticas com hover extra
+  const memories = [
     "✨ Onde tudo começou",
     "☕ Nosso café em Jaguaruna",
     "📍 Conhecendo Jaguaruna",
@@ -371,9 +535,33 @@ const memories = [
     "⭐ Companheiros de sempre",
     "⏳ Quase lá...",
     "❤️ Conseguimos!"
-];
+  ];
 
-  // Datas no formato DD/MM/AAAA (aparecerão APENAS no topo da foto)
+  // Textos que aparecem no hover (legenda extra)
+  const hoverTexts = [
+    "💭 primeiro olhar",
+    "💭 risadas sem fim",
+    "💭 descobrindo o mundo juntos",
+    "💭 um novo começo",
+    "💭 o sim mais lindo",
+    "💭 felicidade simples",
+    "💭 dança e cerveja",
+    "💭 sonho realizado",
+    "💭 crescendo juntos",
+    "💭 de mãos dadas",
+    "💭 nosso lar",
+    "💭 melhor surpresa",
+    "💭 aproveitando cada segundo",
+    "💭 histórias pra contar",
+    "💭 saudade gostosa",
+    "💭 capítulo especial",
+    "💭 almas gêmeas",
+    "💭 pra toda vida",
+    "💭 quase lá",
+    "💭 20 anos!"
+  ];
+
+  // Datas - última alterada para algo realista
   const datesList = [
     "05/04/2007",
     "06/04/2007",
@@ -394,7 +582,7 @@ const memories = [
     "24/12/2023",
     "10/05/2024",
     "01/01/2025",
-    "05/04/2027"
+    "✨ Eternamente ✨"
   ];
 
   const timelineContainer = document.getElementById('timeline');
@@ -406,6 +594,7 @@ const memories = [
       const heartIcon = i % 3 === 0 ? '💗' : (i % 2 === 0 ? '💖' : '💘');
       const displayDate = datesList[i-1];
       const captionText = memories[i - 1] || "❤️ Nossa memória";
+      const hoverExtra = hoverTexts[i - 1] || "💭 clique e recorde";
       const imgSrc = `fotos/foto${i}.webp`;
       
       entry.innerHTML = `
@@ -416,7 +605,7 @@ const memories = [
             <img src="${imgSrc}" alt="Momento ${i}" loading="lazy" 
                  onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'placeholder-txt\\' style=\\'display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; background:#f9e2d6; color:#bb6e88; border-radius:10px;\\'><span>💌 ${captionText.split(' ')[0]} ${i}</span><span style=\\'font-size:0.7rem; margin-top:8px\\'>📸 adicione foto${i}.webp</span></div><div class=\\'photo-date\\' style=\\'position:absolute; top:10px; right:12px;\\'>${displayDate}</div>';">
           </div>
-          <div class="caption">${captionText}</div>
+          <div class="caption" data-hover="${hoverExtra}">${captionText}</div>
         </div>
       `;
 
@@ -427,12 +616,73 @@ const memories = [
           this.classList.add('touched');
           setTimeout(() => {
             this.classList.remove('touched');
-          }, 280);
+          }, 200);
         });
       }
 
       timelineContainer.appendChild(entry);
     }
+  }
+
+  // Contador de dias desde 05/04/2007
+  function calcularDias() {
+    const start = new Date(2007, 3, 5); // 05/04/2007
+    const hoje = new Date();
+    const diff = Math.floor((hoje - start) / (1000 * 60 * 60 * 24));
+    const daysElement = document.getElementById('daysCounter');
+    if (daysElement) {
+      daysElement.innerHTML = diff.toLocaleString();
+    }
+  }
+  calcularDias();
+
+  // Função para criar confetes
+  function criarConfete() {
+    const colors = ['#ff6b8a', '#ff9a5e', '#ffb7c7', '#e66b8a', '#ffd700', '#ff88aa'];
+    const confetti = document.createElement('div');
+    confetti.classList.add('confetti');
+    confetti.style.left = Math.random() * 100 + '%';
+    confetti.style.width = Math.random() * 8 + 4 + 'px';
+    confetti.style.height = confetti.style.width;
+    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDuration = Math.random() * 2 + 1.5 + 's';
+    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+    document.body.appendChild(confetti);
+    
+    setTimeout(() => {
+      confetti.remove();
+    }, 3000);
+  }
+
+  // Botão surpresa
+  const surpriseBtn = document.getElementById('surpriseBtn');
+  if (surpriseBtn) {
+    surpriseBtn.addEventListener('click', () => {
+      // Mensagem de amor
+      const messages = [
+        '💝 20 anos juntos! Você é o amor da minha vida! 💝',
+        '🌟 Cada dia ao seu lado é um presente. Te amo! 🌟',
+        '💕 Nossa história é a mais linda que eu poderia sonhar! 💕',
+        '🎉 Parabéns pra nós! 20 anos de puro amor! 🎉',
+        '❤️ Você transformou minha vida. Sou grato(a) todos os dias! ❤️'
+      ];
+      const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+      alert(randomMsg);
+      
+      // Confetes por 2 segundos
+      for (let i = 0; i < 80; i++) {
+        setTimeout(() => criarConfete(), i * 30);
+      }
+      
+      // Efeito de pulsação no coração grande
+      const bigHeart = document.querySelector('.heart-big');
+      if (bigHeart) {
+        bigHeart.style.animation = 'none';
+        setTimeout(() => {
+          bigHeart.style.animation = 'softPulse 2s infinite ease-in-out';
+        }, 10);
+      }
+    });
   }
 
   // Intersection Observer para animação suave
@@ -462,8 +712,7 @@ const memories = [
     });
   }, 200);
   
-  console.log("%c💖 20 anos juntos! Cada data guarda uma memória especial. 💖", "color: #e6577c; font-size: 14px; font-family: monospace;");
-  
+  // Suporte para touch
   if ('ontouchstart' in window) {
     document.querySelectorAll('.polaroid').forEach(p => {
       p.addEventListener('touchstart', function() {
@@ -474,6 +723,8 @@ const memories = [
       });
     });
   }
+  
+  console.log("%c💖 20 anos juntos! Cada momento é especial. 💖", "color: #e6577c; font-size: 14px; font-family: monospace;");
 </script>
 </body>
 </html>
