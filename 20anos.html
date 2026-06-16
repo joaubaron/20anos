@@ -991,16 +991,26 @@ modal.addEventListener('click', (e) => {
 
 // ── TOQUE LONGO NAS POLAROIDS ──
 const secretMsgs = [
-  "você transforma qualquer lugar no meu lar ❤️",
-  "te escolheria de novo em cada vida",
-  "seu sorriso ainda me deixa sem fôlego",
-  "contigo aprendi o que é amor de verdade",
-  "você é minha parte favorita de toda história",
-  "cada momento ao seu lado foi um presente",
-  "você me faz querer ser um homem melhor",
-  "meu coração te reconhece em qualquer lugar",
-  "obrigado por nunca me deixar sozinho",
-  "vinte anos e ainda me apaixono todo dia"
+  "aquele olhar que mudou tudo pra mim",
+  "foi ali que soube que era você",
+  "nossa primeira aventura juntos",
+  "o dia que minha vida ficou completa",
+  "o sim mais lindo que já ouvi",
+  "felicidade não precisa de muito, só de você",
+  "dançando e rindo, do seu jeito",
+  "o melhor dia da minha vida, sem dúvida",
+  "crescemos juntos e foi lindo",
+  "de mãos dadas em cada curva da vida",
+  "onde você está é onde quero estar",
+  "a melhor surpresa que a vida me deu",
+  "cada lugar fica mais bonito ao seu lado",
+  "histórias que só nós dois sabemos",
+  "brindando a você, meu maior motivo",
+  "prost! por mais anos assim",
+  "duas almas que não se separam",
+  "para sempre é pouco pra mim",
+  "juntos a gente sempre chega lá",
+  "conseguimos, meu amor, e foi incrível ❤️"
 ];
 
 let longPressTimer = null;
@@ -1015,7 +1025,8 @@ function mostrarSegredo(frame) {
     msg = document.createElement('div');
     msg.className = 'secret-msg';
     const span = document.createElement('span');
-    span.textContent = secretMsgs[Math.floor(Math.random() * secretMsgs.length)];
+    const idx = parseInt(frame.id.replace('frame-', '')) - 1;
+    span.textContent = secretMsgs[idx] || secretMsgs[0];
     msg.appendChild(span);
     frame.appendChild(msg);
   }
