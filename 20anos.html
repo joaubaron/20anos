@@ -650,8 +650,16 @@
 
   /* ── TOQUE LONGO ── */
   .frame.secret-active img {
-    filter: blur(8px) brightness(1.7) saturate(0.3);
+    filter: blur(10px) brightness(2.2) saturate(0) !important;
     transition: filter 0.4s ease;
+  }
+  .frame.secret-active::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.5);
+    z-index: 5;
+    pointer-events: none;
   }
   .secret-msg {
     position: absolute;
@@ -665,10 +673,11 @@
   }
   .secret-msg span {
     font-family: 'Dancing Script', cursive; /* ← TROQUE A FONTE AQUI */
-    font-size: 1.05rem;                     /* ← TAMANHO DO TEXTO */
+    font-size: 1.2rem;                      /* ← TAMANHO DO TEXTO */
     color: #7a3a4a;                         /* ← COR DO TEXTO */
     text-align: center;
     line-height: 1.5;
+    text-shadow: 0 1px 6px rgba(255,255,255,0.8);
     opacity: 0;
     transform: scale(0.92);
     transition: opacity 0.4s ease, transform 0.4s ease;
