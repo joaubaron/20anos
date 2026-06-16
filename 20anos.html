@@ -187,20 +187,23 @@
     padding: 20px 20px 60px;
   }
 
-/* Filete sobe para cobrir o gap */
+/* Filete sobe até a frase do topo */
 .timeline-line {
   position: absolute;
   left: 50%;
-  top: -30px;   /* sobe para fora da timeline, cobrindo o gap do header */
+  top: -150px;   /* antes -30px: agora alcança a frase */
   bottom: 0;
   width: 1px;
+
   background: linear-gradient(to bottom,
     transparent 0%,
-    rgba(200,86,110,0.3) 8%,
+    rgba(200,86,110,0.15) 8%,
+    rgba(200,86,110,0.3) 18%,
     rgba(200,86,110,0.3) 50%,
     var(--rose-light) 95%,
     transparent 100%
   );
+
   transform: translateX(-50%);
 }
 
