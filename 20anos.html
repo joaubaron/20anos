@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="screen-orientation" content="portrait">
 <title>20 Anos Juntos ❤️</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@400;600&display=swap');
@@ -957,6 +958,13 @@ modal.addEventListener('click', (e) => {
     stopAudio();
   }
 });
+
+// ── TRAVA ORIENTAÇÃO DA TELA ──
+if (screen.orientation && screen.orientation.lock) {
+  screen.orientation.lock('portrait').catch(() => {});
+}
 </script>
+</body>
+</html>
 </body>
 </html>
