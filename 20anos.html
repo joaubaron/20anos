@@ -644,6 +644,36 @@
   /* ── AUDIO HIDDEN ── */
   #surpriseAudio { position: fixed; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
+  /* ── TOQUE LONGO ── */
+  .frame.secret-active img {
+    filter: blur(5px) brightness(1.25) saturate(0.6);
+    transition: filter 0.4s ease;
+  }
+  .secret-msg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: none;
+    padding: 16px;
+  }
+  .secret-msg span {
+    font-family: 'Dancing Script', cursive; /* ← TROQUE A FONTE AQUI */
+    font-size: 1.05rem;                     /* ← TAMANHO DO TEXTO */
+    color: #7a3a4a;                         /* ← COR DO TEXTO */
+    text-align: center;
+    line-height: 1.5;
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .secret-msg.show span {
+    opacity: 1;
+    transform: scale(1);
+  }
+
   /* ── MOBILE ── */
   @media (max-width: 500px) {
     .polaroid { width: 88%; padding: 10px 10px 14px; }
@@ -958,6 +988,70 @@ modal.addEventListener('click', (e) => {
     stopAudio();
   }
 });
+
+// ── TOQUE LONGO NAS POLAROIDS ──
+const secretMsgs = [
+  "você transforma qualquer lugar no meu lar ❤️",
+  "te escolheria de novo em cada vida",
+  "seu sorriso ainda me deixa sem fôlego",
+  "contigo aprendi o que é amor de verdade",
+  "você é minha parte favorita de toda história",
+  "cada momento ao seu lado foi um presente",
+  "você me faz querer ser um homem melhor",
+  "meu coração te reconhece em qualquer lugar",
+  "obrigado por nunca me deixar sozinho",
+  "vinte anos e ainda me apaixono todo dia"
+];
+
+let longPressTimer = null;
+let activeFrame = null;
+
+function mostrarSegredo(frame) {
+  if (activeFrame && activeFrame !== frame) limparSegredo(activeFrame);
+  activeFrame = frame;
+
+  let msg = frame.querySelector('.secret-msg');
+  if (!msg) {
+    msg = document.createElement('div');
+    msg.className = 'secret-msg';
+    const span = document.createElement('span');
+    span.textContent = secretMsgs[Math.floor(Math.random() * secretMsgs.length)];
+    msg.appendChild(span);
+    frame.appendChild(msg);
+  }
+
+  frame.classList.add('secret-active');
+  requestAnimationFrame(() => msg.classList.add('show'));
+
+  clearTimeout(frame._secretTimer);
+  frame._secretTimer = setTimeout(() => limparSegredo(frame), 3000);
+}
+
+function limparSegredo(frame) {
+  const msg = frame.querySelector('.secret-msg');
+  if (msg) {
+    msg.classList.remove('show');
+    setTimeout(() => { if (msg.parentNode) msg.remove(); }, 400);
+  }
+  frame.classList.remove('secret-active');
+  if (activeFrame === frame) activeFrame = null;
+}
+
+document.addEventListener('touchstart', (e) => {
+  const frame = e.target.closest('.frame');
+  if (!frame) return;
+  longPressTimer = setTimeout(() => mostrarSegredo(frame), 900);
+}, { passive: true });
+
+document.addEventListener('touchend', () => clearTimeout(longPressTimer));
+document.addEventListener('touchmove', () => clearTimeout(longPressTimer));
+
+document.addEventListener('mousedown', (e) => {
+  const frame = e.target.closest('.frame');
+  if (!frame) return;
+  longPressTimer = setTimeout(() => mostrarSegredo(frame), 900);
+});
+document.addEventListener('mouseup', () => clearTimeout(longPressTimer));
 
 // ── TRAVA ORIENTAÇÃO DA TELA ──
 if (screen.orientation && screen.orientation.lock) {
