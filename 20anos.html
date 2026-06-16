@@ -179,32 +179,33 @@
     letter-spacing: 0.04em;
   }
 
-  /* ── LINHA DO TEMPO ── */
-  .timeline {
-    position: relative;
-    max-width: 560px;
-    margin: 0 auto;
-    padding: 20px 20px 60px;
-  }
+ e isso?
+/* ── LINHA DO TEMPO ── */
+.timeline {
+  position: relative;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 20px 20px 60px;
+}
 
-/* Filete sobe até a frase do topo */
+/* Filete contínuo: da frase do topo até o final */
 .timeline-line {
   position: absolute;
   left: 50%;
-  top: -150px;   /* antes -30px: agora alcança a frase */
+  top: -210px;   /* Ajuste para alcançar exatamente a frase "Estamos juntos e fortes" */
   bottom: 0;
-  width: 1px;
-
+  width: 2px;    /* Um pouco mais visível */
   background: linear-gradient(to bottom,
-    transparent 0%,
-    rgba(200,86,110,0.15) 8%,
-    rgba(200,86,110,0.3) 18%,
-    rgba(200,86,110,0.3) 50%,
-    var(--rose-light) 95%,
+    rgba(200,86,110,0.1) 0%,
+    rgba(200,86,110,0.25) 6%,
+    rgba(200,86,110,0.4) 15%,
+    rgba(200,86,110,0.5) 30%,
+    var(--rose-light) 70%,
+    rgba(200,86,110,0.3) 95%,
     transparent 100%
   );
-
   transform: translateX(-50%);
+  z-index: 1;
 }
 
   /* ── ENTRADA ── */
