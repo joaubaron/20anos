@@ -183,7 +183,6 @@
     letter-spacing: 0.04em;
   }
 
- e isso?
 /* ── LINHA DO TEMPO ── */
 .timeline {
   position: relative;
@@ -196,21 +195,22 @@
   display: none;
 }
   
-/* Filete sobe para cobrir o gap */
+/* Filete apenas no início com gradiente suave - DESAPARECE COMPLETAMENTE */
 .timeline-line {
   position: absolute;
   left: 50%;
-  top: -30px;   /* sobe para fora da timeline, cobrindo o gap do header */
-  bottom: 0;
+  top: -30px;   /* sobe para cobrir o gap do header */
+  height: 70%;  /* só até os cards, não chega no texto final */
   width: 1px;
   background: linear-gradient(to bottom,
-    transparent 0%,
-    rgba(200,86,110,0.3) 8%,
-    rgba(200,86,110,0.3) 50%,
-    var(--rose-light) 95%,
+    rgba(200,86,110,0.3) 0%,
+    rgba(200,86,110,0.2) 20%,
+    rgba(200,86,110,0.1) 45%,
+    rgba(200,86,110,0.02) 70%,
     transparent 100%
   );
   transform: translateX(-50%);
+  pointer-events: none;
 }
 
   /* ── ENTRADA ── */
