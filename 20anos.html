@@ -38,19 +38,19 @@
     z-index: 0;
   }
 
-  /* ── ABERTURA ── */
-  #opening {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: opacity 1.5s ease;
-    overflow: hidden;
-  }
+/* TELA DE ABERTURA */
+#opening {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 1.5s ease;
+  overflow: hidden;
+}
 
   #opening-bg {
     position: absolute;
@@ -446,28 +446,32 @@
     color: var(--rose);
   }
 
-  /* ── BOTÃO SURPRESA ── */
-  .surprise-btn {
-    position: fixed;
-    bottom: 28px;
-    right: 28px;
-    z-index: 500;
-    background: var(--rose);
-    border: none;
-    color: white;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
-    letter-spacing: 0.05em;
-    padding: 14px 22px;
-    border-radius: 60px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 8px 30px rgba(200,86,110,0.45);
-    transition: all 0.35s cubic-bezier(0.34,1.4,0.64,1);
-    animation: btnFloat 3s ease-in-out infinite;
-  }
+ .surprise-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 500;
+  background: var(--rose);
+  border: none;
+  color: white;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  padding: 14px 22px;
+  border-radius: 60px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 30px rgba(200,86,110,0.45);
+  transition: all 0.35s cubic-bezier(0.34,1.4,0.64,1);
+  animation: btnFloat 3s ease-in-out infinite;
+}
+
+/* ADICIONE ISSO PARA ESCONDER NA TELA DE ABERTURA */
+#opening .surprise-btn {
+  display: none;
+}
 
   .surprise-btn:hover {
     transform: scale(1.06) translateY(-2px);
