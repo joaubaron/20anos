@@ -782,6 +782,27 @@
 </div>
 
 <script>
+// ── FORÇAR SCROLL PARA O TOPO AO ABRIR PWA ──
+(function() {
+  window.scrollTo(0, 0);
+  
+  if (document.readyState === 'complete') {
+    window.scrollTo(0, 0);
+  } else {
+    window.addEventListener('load', function() {
+      window.scrollTo(0, 0);
+    });
+  }
+  
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') {
+      setTimeout(function() {
+        window.scrollTo(0, 0);
+      }, 50);
+    }
+  });
+})();
+
 // ── DADOS ──
 const memories = [
   "Onde tudo começou", "Nosso café em Jaguaruna", "Conhecendo Jaguaruna",
