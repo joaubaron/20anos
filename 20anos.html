@@ -41,7 +41,6 @@
   #opening {
     position: fixed;
     inset: 0;
-    background: radial-gradient(ellipse at center, #3d1020 0%, #1e0810 100%);
     z-index: 9999;
     display: flex;
     flex-direction: column;
@@ -49,6 +48,28 @@
     justify-content: center;
     cursor: pointer;
     transition: opacity 1.5s ease;
+    overflow: hidden;
+  }
+
+  #opening-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('fotos/foto21.webp');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+
+  #opening-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(60, 0, 80, 0.72) 0%,
+      rgba(100, 20, 120, 0.55) 35%,
+      rgba(40, 0, 60, 0.78) 100%
+    );
   }
 
   #opening.fade-out {
@@ -636,6 +657,7 @@
 
 <!-- TELA DE ABERTURA -->
 <div id="opening">
+  <div id="opening-bg"></div>
   <div class="opening-year">20</div>
   <div class="opening-heart">💕</div>
   <div class="opening-title">Cláudia, esta história é nossa</div>
