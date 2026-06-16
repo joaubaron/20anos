@@ -77,16 +77,6 @@
     pointer-events: none;
   }
 
-.opening-year {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(8rem, 25vw, 16rem);
-    margin-top: 40px;
-    color: rgba(255,255,255,0.06);
-    letter-spacing: -0.05em; /* aproxima o 2 do 0 */
-    position: absolute;
-    user-select: none;
-}
-
   .opening-heart {
     font-size: clamp(3rem, 10vw, 6rem);
     animation: heartBeat 1.4s ease-in-out infinite;
@@ -95,6 +85,16 @@
     z-index: 2;
     filter: drop-shadow(0 0 40px rgba(200,86,110,0.8));
   }
+  
+  .opening-year {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(8rem, 25vw, 16rem);
+    margin-top: 40px;
+    color: rgba(255,255,255,0.20);
+    letter-spacing: -0.05em;
+    position: absolute;
+    user-select: none;
+}
 
   .opening-title {
     font-family: 'Dancing Script', cursive;
