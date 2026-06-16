@@ -1000,15 +1000,26 @@ const secretMsgs = [
 ];
 
 let activeOverlay = null;
+let activeFrame = null;  // ← NOVO: guarda qual frame está ativo
 
 function toggleOverlay(frame) {
-  // Se já existe um overlay ativo, remove
-  if (activeOverlay) {
+  // Se já existe um overlay ativo e é o mesmo frame, remove
+  if (activeOverlay && activeFrame === frame) {
     activeOverlay.remove();
     activeOverlay = null;
     const img = frame.querySelector('img');
     if (img) img.style.filter = '';
+    activeFrame = null;
     return;
+  }
+
+  // Se existe um overlay ativo em outro frame, remove ele primeiro
+  if (activeOverlay && activeFrame !== frame) {
+    activeOverlay.remove();
+    activeOverlay = null;
+    const oldImg = activeFrame ? activeFrame.querySelector('img') : null;
+    if (oldImg) oldImg.style.filter = '';
+    activeFrame = null;
   }
 
   // Cria o overlay com bgfotos.webp
@@ -1059,6 +1070,7 @@ function toggleOverlay(frame) {
   }
 
   activeOverlay = overlay;
+  activeFrame = frame;  // ← GUARDA QUAL FRAME ESTÁ ATIVO
 }
 
 // CLICK nas fotos
@@ -1073,6 +1085,7 @@ document.addEventListener('click', (e) => {
       activeOverlay = null;
       const img = frame.querySelector('img');
       if (img) img.style.filter = '';
+      activeFrame = null;
     }
     return;
   }
