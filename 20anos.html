@@ -192,9 +192,9 @@
 .timeline-line {
   position: absolute;
   left: 50%;
-  top: -210px;   /* Ajuste para alcançar exatamente a frase "Estamos juntos e fortes" */
+  top: -210px;
   bottom: 0;
-  width: 2px;    /* Um pouco mais visível */
+  width: 2px;
   background: linear-gradient(to bottom,
     rgba(200,86,110,0.1) 0%,
     rgba(200,86,110,0.25) 6%,
@@ -205,7 +205,7 @@
     transparent 100%
   );
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 0;  /* MUDE AQUI: de 1 para 0 */
 }
 
   /* ── ENTRADA ── */
