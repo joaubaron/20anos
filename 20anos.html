@@ -603,6 +603,37 @@
     border-color: var(--rose);
   }
 
+  /* Botão fechar fixo — sempre visível no topo do modal */
+  .modal-close-fixed {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(200,86,110,0.18);
+    color: var(--rose-light);
+    font-size: 0.72rem;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.1em;
+    padding: 5px 13px;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.75;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .modal-close-fixed:hover {
+    opacity: 1;
+    background: rgba(255,255,255,0.85);
+    border-color: rgba(200,86,110,0.4);
+    color: var(--rose);
+  }
+
   .petal {
     position: fixed;
     pointer-events: none;
@@ -677,6 +708,7 @@
 <div class="modal-overlay" id="lyricsModal">
   <div class="modal-card">
     <div class="modal-deco"></div>
+    <button class="modal-close-fixed" id="closeLyricsFixed">✕ fechar</button>
     <div class="modal-title">Viver com Você</div>
     <div class="modal-subtitle">estamos juntos e fortes</div>
     <div class="lyrics-stanza">
@@ -953,6 +985,9 @@ document.getElementById('surpriseBtn').addEventListener('click', () => {
   setTimeout(startAutoScroll, 300); // aguarda card aparecer
 });
 document.getElementById('closeLyricsBtn').addEventListener('click', () => {
+  modal.classList.remove('active'); stopAudio(); stopAutoScroll();
+});
+document.getElementById('closeLyricsFixed').addEventListener('click', () => {
   modal.classList.remove('active'); stopAudio(); stopAutoScroll();
 });
 modal.addEventListener('click', (e) => {
