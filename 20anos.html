@@ -606,9 +606,9 @@
   /* Botão fechar fixo — sempre visível no topo do modal */
   .modal-close-fixed {
     position: absolute;
-    top: 14px;
-    right: 16px;
-    z-index: 10;
+    top: 18px;
+    right: 18px;
+    z-index: 2100;
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -706,9 +706,9 @@
 <audio id="surpriseAudio" preload="auto"></audio>
 
 <div class="modal-overlay" id="lyricsModal">
+  <button class="modal-close-fixed" id="closeLyricsFixed">✕ fechar</button>
   <div class="modal-card">
     <div class="modal-deco"></div>
-    <button class="modal-close-fixed" id="closeLyricsFixed">✕ fechar</button>
     <div class="modal-title">Viver com Você</div>
     <div class="modal-subtitle">estamos juntos e fortes</div>
     <div class="lyrics-stanza">
