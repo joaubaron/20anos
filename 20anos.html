@@ -906,14 +906,54 @@ function criarPetalas() {
 }
 
 const modal = document.getElementById('lyricsModal');
+let autoScrollRAF = null;
+
+function startAutoScroll() {
+  const card = modal.querySelector('.modal-card');
+  if (!card) return;
+  card.scrollTop = 0;
+
+  // espera o áudio ter duração conhecida, depois calcula velocidade
+  function doScroll() {
+    const duration = audio.duration || 180; // fallback 3min
+    const scrollable = card.scrollHeight - card.clientHeight;
+    if (scrollable <= 0) return;
+
+    let startTime = null;
+    const startScroll = card.scrollTop;
+
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      const elapsed = (ts - startTime) / 1000; // segundos
+      const progress = Math.min(elapsed / duration, 1);
+      card.scrollTop = startScroll + scrollable * progress;
+      if (progress < 1 && !audio.paused) {
+        autoScrollRAF = requestAnimationFrame(step);
+      }
+    }
+    autoScrollRAF = requestAnimationFrame(step);
+  }
+
+  if (audio.readyState >= 1 && audio.duration) {
+    doScroll();
+  } else {
+    audio.addEventListener('loadedmetadata', doScroll, { once: true });
+  }
+}
+
+function stopAutoScroll() {
+  if (autoScrollRAF) { cancelAnimationFrame(autoScrollRAF); autoScrollRAF = null; }
+}
+
 document.getElementById('surpriseBtn').addEventListener('click', () => {
   modal.classList.add('active'); playAudio(); criarPetalas();
+  setTimeout(startAutoScroll, 300); // aguarda card aparecer
 });
 document.getElementById('closeLyricsBtn').addEventListener('click', () => {
-  modal.classList.remove('active'); stopAudio();
+  modal.classList.remove('active'); stopAudio(); stopAutoScroll();
 });
 modal.addEventListener('click', (e) => {
-  if (e.target === modal) { modal.classList.remove('active'); stopAudio(); }
+  if (e.target === modal) { modal.classList.remove('active'); stopAudio(); stopAutoScroll(); }
 });
 
 // ── OVERLAY COM FADE SUAVE ──
