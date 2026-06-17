@@ -946,38 +946,87 @@ let autoScrollRAF = null;
 function startAutoScroll() {
   const card = modal.querySelector('.modal-card');
   if (!card) return;
+  
+  // Para qualquer rolagem automática anterior
+  stopAutoScroll();
+  
+  // Reseta o scroll
   card.scrollTop = 0;
-
-  // espera o áudio ter duração conhecida, depois calcula velocidade
-  function doScroll() {
+  
+  // Variáveis de controle
+  let isUserInteracting = false;
+  let userInteractTimeout = null;
+  let lastScrollTop = 0;
+  let autoScrollInterval = null;
+  
+  // Detecta quando o usuário está interagindo com o scroll
+  function handleUserInteraction() {
+    isUserInteracting = true;
+    clearTimeout(userInteractTimeout);
+    userInteractTimeout = setTimeout(() => {
+      isUserInteracting = false;
+      // Retoma a rolagem automática de onde parou
+      if (!audio.paused && autoScrollInterval) {
+        startAutoScrollFromCurrentPosition();
+      }
+    }, 3000); // 3 segundos sem interação volta ao automático
+  }
+  
+  // Eventos de toque e scroll
+  card.addEventListener('touchstart', handleUserInteraction, { passive: true });
+  card.addEventListener('touchmove', handleUserInteraction, { passive: true });
+  card.addEventListener('scroll', () => {
+    // Se o usuário rolou manualmente
+    if (Math.abs(card.scrollTop - lastScrollTop) > 5) {
+      handleUserInteraction();
+    }
+    lastScrollTop = card.scrollTop;
+  }, { passive: true });
+  
+  // Função para iniciar rolagem automática da posição atual
+  function startAutoScrollFromCurrentPosition() {
+    stopAutoScroll();
+    
     const duration = (audio.duration || 180) * 0.70;
     const scrollable = card.scrollHeight - card.clientHeight;
     if (scrollable <= 0) return;
-
-    let startTime = null;
+    
     const startScroll = card.scrollTop;
-
-    function step(ts) {
-      if (!startTime) startTime = ts;
-      const elapsed = (ts - startTime) / 1000; // segundos
-      const progress = Math.min(elapsed / duration, 1);
-      card.scrollTop = startScroll + scrollable * progress;
-      if (progress < 1 && !audio.paused) {
-        autoScrollRAF = requestAnimationFrame(step);
+    const remainingScroll = scrollable - startScroll;
+    if (remainingScroll <= 0) return;
+    
+    // Calcula a velocidade baseada no tempo restante da música
+    const remainingTime = duration * (1 - (startScroll / scrollable));
+    const speed = remainingScroll / (remainingTime * 60); // pixels por frame (~60fps)
+    
+    autoScrollInterval = setInterval(() => {
+      if (!audio.paused && !isUserInteracting) {
+        const newScroll = card.scrollTop + speed;
+        if (newScroll >= scrollable) {
+          card.scrollTop = scrollable;
+          stopAutoScroll();
+        } else {
+          card.scrollTop = newScroll;
+        }
       }
-    }
-    autoScrollRAF = requestAnimationFrame(step);
+    }, 1000 / 60);
   }
-
+  
+  // Inicia a rolagem automática
   if (audio.readyState >= 1 && audio.duration) {
-    doScroll();
+    setTimeout(startAutoScrollFromCurrentPosition, 300);
   } else {
-    audio.addEventListener('loadedmetadata', doScroll, { once: true });
+    audio.addEventListener('loadedmetadata', () => {
+      setTimeout(startAutoScrollFromCurrentPosition, 300);
+    }, { once: true });
   }
 }
 
 function stopAutoScroll() {
-  if (autoScrollRAF) { cancelAnimationFrame(autoScrollRAF); autoScrollRAF = null; }
+  if (autoScrollInterval) {
+    clearInterval(autoScrollInterval);
+    autoScrollInterval = null;
+  }
 }
 
 document.getElementById('surpriseBtn').addEventListener('click', () => {
