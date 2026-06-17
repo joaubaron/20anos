@@ -506,13 +506,17 @@
     border-radius: 8px;
     padding: 44px 32px 40px;
     box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,86,110,0.15);
-    overflow-y: hidden;
+    overflow-y: auto;
     scrollbar-width: none;
-    touch-action: none;
+    touch-action: auto;
     text-align: center;
     transform: translateY(30px) scale(0.96);
     transition: transform 0.5s cubic-bezier(0.34,1.2,0.64,1);
     position: relative;
+  }
+
+  .modal-card::-webkit-scrollbar {
+    display: none;
   }
 
   .modal-overlay.active .modal-card {
@@ -941,7 +945,7 @@ function criarPetalas() {
 }
 
 const modal = document.getElementById('lyricsModal');
-let autoScrollRAF = null;
+let autoScrollInterval = null;
 
 function startAutoScroll() {
   const card = modal.querySelector('.modal-card');
@@ -957,7 +961,6 @@ function startAutoScroll() {
   let isUserInteracting = false;
   let userInteractTimeout = null;
   let lastScrollTop = 0;
-  let autoScrollInterval = null;
   
   // Detecta quando o usuário está interagindo com o scroll
   function handleUserInteraction() {
@@ -966,7 +969,7 @@ function startAutoScroll() {
     userInteractTimeout = setTimeout(() => {
       isUserInteracting = false;
       // Retoma a rolagem automática de onde parou
-      if (!audio.paused && autoScrollInterval) {
+      if (!audio.paused) {
         startAutoScrollFromCurrentPosition();
       }
     }, 3000); // 3 segundos sem interação volta ao automático
