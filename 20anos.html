@@ -443,28 +443,6 @@ font-size: 1.6rem;
 color: var(--rose);
 }
 
-.surprise-btn {
-position: fixed;
-bottom: 28px;
-right: 28px;
-z-index: 500;
-background: var(--rose);
-border: none;
-color: white;
-font-family: 'Cormorant Garamond', serif;
-font-size: 0.95rem;
-letter-spacing: 0.05em;
-padding: 14px 22px;
-border-radius: 60px;
-cursor: pointer;
-display: flex;
-align-items: center;
-gap: 10px;
-box-shadow: 0 8px 30px rgba(200,86,110,0.45);
-transition: all 0.35s cubic-bezier(0.34,1.4,0.64,1);
-animation: btnFloat 3s ease-in-out infinite;
-}
-
 #opening .surprise-btn {
 display: none;
 }
@@ -805,6 +783,34 @@ background: var(--rose) !important;
 color: white !important;
 }
 
+/* ── BOTÃO SURPRESA ── */
+.surprise-btn {
+position: fixed;
+bottom: 40px;
+right: 120px;
+z-index: 500;
+background: none;
+border: none;
+padding: 0;
+cursor: pointer;
+display: flex;
+align-items: center;
+transition: all 0.35s cubic-bezier(0.34,1.4,0.64,1);
+animation: btnFloat 3.5s ease-in-out 0.5s infinite;
+filter: drop-shadow(0 4px 12px rgba(200,86,110,0.35));
+}
+#opening .surprise-btn { display: none; }
+.surprise-btn:hover {
+transform: scale(1.08) translateY(-2px);
+filter: drop-shadow(0 8px 20px rgba(200,86,110,0.5));
+}
+.surprise-btn-img { width: 50px; height: auto; display: block; }
+
+@media (max-width: 500px) {
+.surprise-btn { bottom: 70px; right: 100px; }
+.surprise-btn-img { width: 60px; }
+}
+  
 </style>
 </head>
 <body>
@@ -868,8 +874,7 @@ Sem o seu amor... 💕
 </div>
 
 <button class="surprise-btn" id="surpriseBtn">
-<span class="btn-icon">💞</span>
-Uma surpresa
+<img src="fotos/surpresa.png" alt="Uma surpresa" class="surprise-btn-img">
 </button>
 
 <button class="letter-btn" id="letterBtn">
