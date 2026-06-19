@@ -931,34 +931,6 @@ Obrigado por ser minha vida,<br>
 
 <script>
 
-// FORÇA TELA CHEIA NO ANDROID
-document.addEventListener('DOMContentLoaded', function() {
-// Tenta entrar em tela cheia
-function goFullscreen() {
-const el = document.documentElement;
-if (el.requestFullscreen) {
-el.requestFullscreen().catch(() => {});
-} else if (el.webkitRequestFullscreen) {
-el.webkitRequestFullscreen();
-} else if (el.msRequestFullscreen) {
-el.msRequestFullscreen();
-}
-}
-
-// Tenta automaticamente
-goFullscreen();
-
-// Tenta de novo no primeiro toque (garantia)
-document.addEventListener('touchstart', function() {
-goFullscreen();
-}, { once: true });
-
-// Tenta de novo no primeiro clique
-document.addEventListener('click', function() {
-goFullscreen();
-}, { once: true });
-});
-
 (function() {
 window.scrollTo(0, 0);
 if (document.readyState === 'complete') {
