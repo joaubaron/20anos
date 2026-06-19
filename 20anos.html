@@ -79,7 +79,7 @@
   .opening-heart {
     font-size: clamp(4.0rem, 15vw, 8.0rem);
     animation: heartBeat 1.4s ease-in-out infinite;
-    margin-top: 285px;
+    margin-top: 55vh;
     position: relative;
     z-index: 2;
     filter: drop-shadow(0 0 40px rgba(200,86,110,0.8));
@@ -88,7 +88,7 @@
   .opening-year {
     font-family: 'Dancing Script', cursive;
     font-size: clamp(8.5rem, 30vw, 17rem);
-    margin-top: 250px;
+    margin-top: 50vh;
     color: rgba(255,255,255,0.20);
     letter-spacing: -0.05em;
     position: absolute;
@@ -797,8 +797,8 @@
       Como um pássaro não voa sem ter asas<br>
       Nas curvas da vida você me deu a mão<br>
       Superamos tempestades, <strong>Cláudia</strong>
-    <div class="lyrics-divider">✦</div>
     </div>
+    <div class="lyrics-divider">✦</div>
     <div class="lyrics-chorus">
       ❤️ Mas eu não posso, sinto que morro<br>
       Estou afogando sem o seu amor<br>
@@ -810,8 +810,8 @@
       Mas não consigo sem o seu calor<br>
       Dois corações, uma só direção<br>
       Cada dia ao seu lado é um lugar especial, <strong>Cláudia</strong>
-    <div class="lyrics-divider">✦</div>
     </div>
+    <div class="lyrics-divider">✦</div>
     <div class="lyrics-chorus">
       Mas eu não posso, sinto que morro<br>
       Estou afogando sem o seu amor<br>
@@ -979,6 +979,7 @@ function startExperience() {
 opening.addEventListener('click', startExperience);
 
 const timelineContainer = document.getElementById('timeline');
+const fragment = document.createDocumentFragment();
 for (let i = 1; i <= 20; i++) {
   const entry = document.createElement('div');
   entry.className = 'entry';
@@ -1001,8 +1002,9 @@ for (let i = 1; i <= 20; i++) {
       </div>
     </div>
   `;
-  timelineContainer.appendChild(entry);
+  fragment.appendChild(entry);
 }
+timelineContainer.appendChild(fragment);
 
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
@@ -1011,11 +1013,16 @@ document.querySelectorAll('.entry').forEach(el => io.observe(el));
 io.observe(document.getElementById('finale'));
 
 const audio = document.getElementById('surpriseAudio');
-const bgAudio = new Audio('lavitaadesso.mp3');
-bgAudio.loop = true;
-bgAudio.volume = 0.15;
-function playBg() { bgAudio.play().catch(() => {}); }
-function pauseBg() { bgAudio.pause(); }
+let bgAudio = null;
+function playBg() {
+  if (!bgAudio) {
+    bgAudio = new Audio('lavitaadesso.mp3');
+    bgAudio.loop = true;
+    bgAudio.volume = 0.15;
+  }
+  bgAudio.play().catch(() => {});
+}
+function pauseBg() { if (bgAudio) bgAudio.pause(); }
 function playAudio() {
   pauseBg();
   audio.src = 'viversemar.mp3';
@@ -1085,8 +1092,6 @@ function removeOverlay() {
   activeOverlay = null;
   activeFrame = null;
   ol.style.opacity = '0';
-  const img = fr ? fr.querySelector('img') : null;
-  if (img) img.style.filter = '';
   setTimeout(() => ol.remove(), 450);
 }
 
@@ -1121,12 +1126,6 @@ function toggleOverlay(frame) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => { overlay.style.opacity = '1'; });
   });
-
-  const img = frame.querySelector('img');
-  if (img) {
-    img.style.transition = 'filter 0.45s ease';
-    img.style.filter = 'brightness(1.1) saturate(0.5)';
-  }
 
   activeOverlay = overlay;
   activeFrame = frame;
