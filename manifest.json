@@ -1,0 +1,10 @@
+{
+  "name": "20 Anos Juntos",
+  "short_name": "20 Anos",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "start_url": "/",
+  "background_color": "#fffaf7",
+  "theme_color": "#c8566e",
+  "icons": [...]
+}
