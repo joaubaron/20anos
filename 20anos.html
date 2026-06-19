@@ -371,11 +371,12 @@ padding: 12px;
 
 .ph span:first-child { font-size: 1.6rem; }
 
-/* OVERLAY — fade suave, sem black flash */
 .foto-overlay {
 position: absolute;
 inset: 0;
-background: url('fotos/bgfotos.webp') center/cover no-repeat;
+background: 
+linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
+url('fotos/bgfotos.webp') center/cover no-repeat;
 z-index: 20;
 display: flex;
 align-items: center;
