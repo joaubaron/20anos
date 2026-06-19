@@ -765,6 +765,48 @@
   color: white;
 }
 
+  /* Remove marcas de clique/foco em todos os botões interativos */
+.surprise-btn,
+.close-btn,
+.letter-btn,
+.letter-close-btn {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  user-select: none !important;
+}
+
+.surprise-btn:focus,
+.close-btn:focus,
+.letter-btn:focus,
+.letter-close-btn:focus,
+.surprise-btn:active,
+.close-btn:active,
+.letter-btn:active,
+.letter-close-btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+  background: none !important;
+  /* Mantém o estilo original sem adicionar fundo extra */
+}
+
+/* Especificamente para o .surprise-btn, mantém o fundo original no :active */
+.surprise-btn:active {
+  background: var(--rose) !important;
+}
+
+/* Para o .close-btn, mantém o hover mas remove estados indesejados */
+.close-btn:active {
+  background: var(--rose) !important;
+  color: white !important;
+}
+
+/* Para o .letter-close-btn */
+.letter-close-btn:active {
+  background: var(--rose) !important;
+  color: white !important;
+}
+  
 </style>
 </head>
 <body>
