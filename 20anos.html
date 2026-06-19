@@ -443,6 +443,28 @@ font-size: 1.6rem;
 color: var(--rose);
 }
 
+.surprise-btn {
+position: fixed;
+bottom: 28px;
+right: 28px;
+z-index: 500;
+background: var(--rose);
+border: none;
+color: white;
+font-family: 'Cormorant Garamond', serif;
+font-size: 0.95rem;
+letter-spacing: 0.05em;
+padding: 14px 22px;
+border-radius: 60px;
+cursor: pointer;
+display: flex;
+align-items: center;
+gap: 10px;
+box-shadow: 0 8px 30px rgba(200,86,110,0.45);
+transition: all 0.35s cubic-bezier(0.34,1.4,0.64,1);
+animation: btnFloat 3s ease-in-out infinite;
+}
+
 #opening .surprise-btn {
 display: none;
 }
@@ -634,9 +656,7 @@ color: var(--rose);
 
 @media (max-width: 500px) {
 .polaroid { width: 88%; padding: 10px 10px 14px; }
-.surprise-btn { bottom: 90px; right: 100px; }  /* desceu um pouco (70→90) */
-.surprise-btn-img { width: 120px; }  /* DOBRO (era 60, agora 120) */
-.letter-btn { bottom: 70px; right: 30px; }
+.surprise-btn { bottom: 16px; right: 16px; padding: 12px 16px; font-size: 0.9rem; }
 .modal-card { padding: 36px 20px 32px; }
 .lyrics-chorus { padding: 12px 14px; font-size: 1.18rem; }
 }
@@ -785,38 +805,6 @@ background: var(--rose) !important;
 color: white !important;
 }
 
-/* ── BOTÃO SURPRESA ── */
-.surprise-btn {
-position: fixed;
-bottom: 60px;  /* desceu um pouco (era 40, agora 60) */
-right: 120px;
-z-index: 500;
-background: none;
-border: none;
-padding: 0;
-cursor: pointer;
-display: flex;
-align-items: center;
-transition: all 0.35s cubic-bezier(0.34,1.4,0.64,1);
-animation: btnFloat 3.5s ease-in-out 0.5s infinite;
-filter: drop-shadow(0 4px 12px rgba(200,86,110,0.35));
-}
-#opening .surprise-btn { display: none; }
-.surprise-btn:hover {
-transform: scale(1.08) translateY(-2px);
-filter: drop-shadow(0 8px 20px rgba(200,86,110,0.5));
-}
-.surprise-btn-img { 
-width: 100px;  /* DOBRO (era 50, agora 100) */
-height: auto; 
-display: block; 
-}
-
-@media (max-width: 500px) {
-.surprise-btn { bottom: 70px; right: 100px; }
-.surprise-btn-img { width: 60px; }
-}
-  
 </style>
 </head>
 <body>
@@ -880,7 +868,8 @@ Sem o seu amor... 💕
 </div>
 
 <button class="surprise-btn" id="surpriseBtn">
-<img src="fotos/surpresa.png" alt="Uma surpresa" class="surprise-btn-img">
+<span class="btn-icon">💞</span>
+Uma surpresa
 </button>
 
 <button class="letter-btn" id="letterBtn">
