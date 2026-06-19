@@ -79,7 +79,7 @@
   .opening-heart {
     font-size: clamp(4.0rem, 15vw, 8.0rem);
     animation: heartBeat 1.4s ease-in-out infinite;
-    margin-top: 285px;
+    margin-top: 20vh;
     position: relative;
     z-index: 2;
     filter: drop-shadow(0 0 40px rgba(200,86,110,0.8));
@@ -88,7 +88,7 @@
   .opening-year {
     font-family: 'Dancing Script', cursive;
     font-size: clamp(8.5rem, 30vw, 17rem);
-    margin-top: 250px;
+    margin-top: 15vh;
     color: rgba(255,255,255,0.20);
     letter-spacing: -0.05em;
     position: absolute;
@@ -367,11 +367,12 @@
 
   .ph span:first-child { font-size: 1.6rem; }
 
-  /* OVERLAY — fade suave, sem black flash */
+  /* OVERLAY — SEM BACKGROUND, APENAS FADE */
   .foto-overlay {
     position: absolute;
     inset: 0;
-    background: url('fotos/bgfotos.webp') center/cover no-repeat;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(3px);
     z-index: 20;
     display: flex;
     align-items: center;
@@ -655,6 +656,10 @@
   .surprise-btn { bottom: 16px; right: 16px; padding: 12px 16px; font-size: 0.9rem; }
   .modal-card { padding: 36px 20px 32px; }
   .lyrics-chorus { padding: 12px 14px; font-size: 1.18rem; }
+  
+  /* CORREÇÃO: botão carta reposicionado para não sobrepor */
+  .letter-btn { bottom: 80px; right: 16px; }
+  .letter-btn-img { width: 60px; }
 }
 
 /* ── BOTÃO CARTA ── */
@@ -679,11 +684,6 @@
   filter: drop-shadow(0 8px 20px rgba(200,86,110,0.5));
 }
 .letter-btn-img { width: 50px; height: auto; display: block; }
- 
-@media (max-width: 500px) {
-  .letter-btn { bottom: 70px; right: 30px; }
-  .letter-btn-img { width: 60px; }
-}
 
 /* ── MODAL CARTA ── */
 .envelope-overlay {
@@ -797,8 +797,8 @@
       Como um pássaro não voa sem ter asas<br>
       Nas curvas da vida você me deu a mão<br>
       Superamos tempestades, <strong>Cláudia</strong>
-    <div class="lyrics-divider">✦</div>
     </div>
+    <div class="lyrics-divider">✦</div>
     <div class="lyrics-chorus">
       ❤️ Mas eu não posso, sinto que morro<br>
       Estou afogando sem o seu amor<br>
@@ -810,8 +810,8 @@
       Mas não consigo sem o seu calor<br>
       Dois corações, uma só direção<br>
       Cada dia ao seu lado é um lugar especial, <strong>Cláudia</strong>
-    <div class="lyrics-divider">✦</div>
     </div>
+    <div class="lyrics-divider">✦</div>
     <div class="lyrics-chorus">
       Mas eu não posso, sinto que morro<br>
       Estou afogando sem o seu amor<br>
@@ -971,14 +971,29 @@ const datesList = [
 const opening = document.getElementById('opening');
 const mainContent = document.getElementById('main-content');
 
+// CORREÇÃO 6: bgAudio criado APENAS no clique do usuário
+let bgAudio = null;
+let isBgPlaying = false;
+
 function startExperience() {
+  // Cria o áudio no clique do usuário (iOS)
+  if (!bgAudio) {
+    bgAudio = new Audio('lavitaadesso.mp3');
+    bgAudio.loop = true;
+    bgAudio.volume = 0.15;
+  }
+  bgAudio.play().catch(() => {});
+  isBgPlaying = true;
+  
   opening.classList.add('fade-out');
   setTimeout(() => { opening.style.display = 'none'; mainContent.classList.add('visible'); }, 1500);
-  playBg();
 }
 opening.addEventListener('click', startExperience);
 
+// CORREÇÃO 7: USANDO DocumentFragment
 const timelineContainer = document.getElementById('timeline');
+const fragment = document.createDocumentFragment();
+
 for (let i = 1; i <= 20; i++) {
   const entry = document.createElement('div');
   entry.className = 'entry';
@@ -1001,8 +1016,9 @@ for (let i = 1; i <= 20; i++) {
       </div>
     </div>
   `;
-  timelineContainer.appendChild(entry);
+  fragment.appendChild(entry);
 }
+timelineContainer.appendChild(fragment);
 
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
@@ -1011,11 +1027,24 @@ document.querySelectorAll('.entry').forEach(el => io.observe(el));
 io.observe(document.getElementById('finale'));
 
 const audio = document.getElementById('surpriseAudio');
-const bgAudio = new Audio('lavitaadesso.mp3');
-bgAudio.loop = true;
-bgAudio.volume = 0.15;
-function playBg() { bgAudio.play().catch(() => {}); }
-function pauseBg() { bgAudio.pause(); }
+
+// CORREÇÃO 5: Feedback visual do estado da música
+function playBg() { 
+  if (bgAudio) {
+    bgAudio.play().then(() => {
+      isBgPlaying = true;
+      document.getElementById('surpriseBtn').innerHTML = '<span class="btn-icon">🎵</span> Música tocando...';
+    }).catch(() => {});
+  }
+}
+function pauseBg() { 
+  if (bgAudio) {
+    bgAudio.pause(); 
+    isBgPlaying = false;
+    document.getElementById('surpriseBtn').innerHTML = '<span class="btn-icon">💞</span> Uma surpresa';
+  }
+}
+
 function playAudio() {
   pauseBg();
   audio.src = 'viversemar.mp3';
@@ -1051,7 +1080,7 @@ modal.addEventListener('click', (e) => {
   if (e.target === modal) { modal.classList.remove('active'); stopAudio(); }
 });
 
-// ── OVERLAY COM FADE SUAVE ──
+// ── OVERLAY CORREÇÃO 2: SEM BACKGROUND, APENAS FADE ──
 const secretMsgs = [
   "eu não conseguia desviar o olhar de você",
   "depois daquela noite a gente estava com muita fome",
@@ -1102,22 +1131,22 @@ function toggleOverlay(frame) {
   msg.style.cssText = `
     font-family: 'Dancing Script', cursive;
     font-size: 1.3rem;
-    color: #7a3a4a;
+    color: #fff;
     text-align: center;
     line-height: 1.5;
-    background: rgba(255,255,255,0.85);
+    background: rgba(0,0,0,0.6);
     padding: 16px 24px;
     border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     max-width: 90%;
     font-weight: 600;
+    backdrop-filter: blur(4px);
   `;
   msg.textContent = secretMsgs[idx] || '💕';
   overlay.appendChild(msg);
 
   frame.appendChild(overlay);
 
-  // fade in no próximo frame
   requestAnimationFrame(() => {
     requestAnimationFrame(() => { overlay.style.opacity = '1'; });
   });
@@ -1125,7 +1154,7 @@ function toggleOverlay(frame) {
   const img = frame.querySelector('img');
   if (img) {
     img.style.transition = 'filter 0.45s ease';
-    img.style.filter = 'brightness(1.1) saturate(0.5)';
+    img.style.filter = 'brightness(0.7) saturate(0.3)';
   }
 
   activeOverlay = overlay;
@@ -1139,7 +1168,9 @@ document.addEventListener('click', (e) => {
   toggleOverlay(frame);
 });
 
-if (screen.orientation && screen.orientation.lock) {
+// CORREÇÃO 3: screen.orientation.lock com try/catch e verificação mobile
+const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+if (isMobile && screen.orientation && screen.orientation.lock) {
   screen.orientation.lock('portrait').catch(() => {});
 }
 
