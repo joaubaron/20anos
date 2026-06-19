@@ -663,33 +663,26 @@
   bottom: 88px;
   right: 28px;
   z-index: 500;
-  background: white;
-  border: 1.5px solid rgba(200,86,110,0.35);
-  color: var(--rose);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  padding: 12px 18px;
-  border-radius: 60px;
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 20px rgba(200,86,110,0.2);
   transition: all 0.35s cubic-bezier(0.34,1.4,0.64,1);
   animation: btnFloat 3.5s ease-in-out 0.5s infinite;
+  filter: drop-shadow(0 4px 12px rgba(200,86,110,0.35));
 }
 #opening .letter-btn { display: none; }
 .letter-btn:hover {
-  background: #fff5f7;
-  border-color: var(--rose);
-  transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 8px 28px rgba(200,86,110,0.35);
+  transform: scale(1.08) translateY(-2px);
+  filter: drop-shadow(0 8px 20px rgba(200,86,110,0.5));
 }
-.letter-btn-icon { font-size: 1.05rem; }
+.letter-btn-img { width: 72px; height: auto; display: block; }
 
 @media (max-width: 500px) {
-  .letter-btn { bottom: 80px; right: 16px; padding: 10px 14px; font-size: 0.85rem; }
+  .letter-btn { bottom: 80px; right: 16px; }
+  .letter-btn-img { width: 58px; }
 }
 
 /* ── MODAL CARTA ── */
@@ -840,8 +833,7 @@
 </button>
 
 <button class="letter-btn" id="letterBtn">
-  <span class="letter-btn-icon">💌</span>
-  Abra
+  <img src="fotos/carta.png" alt="Abra a carta" class="letter-btn-img">
 </button>
 
 <!-- MODAL CARTA -->
