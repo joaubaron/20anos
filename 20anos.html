@@ -811,7 +811,7 @@ background: var(--rose) !important;
 color: white !important;
 }
 
-/* ── VERSÃO ALTERNATIVA COM POSITION STICKY ── */
+/* ── FORÇAR TELA VERTICAL NO BROWSER ── */
 @media (min-width: 768px) {
 body {
 max-width: 430px;
@@ -822,49 +822,65 @@ box-shadow: 0 0 40px rgba(0,0,0,0.08);
 min-height: 100vh;
 background: #f0e8e0;
 position: relative;
-padding-bottom: 140px; /* Espaço para os botões */
 }
 
+/* Container centralizado */
 #main-content, #opening {
 max-width: 430px;
 margin: 0 auto;
 }
 
+/* Fundo externo mais bonito */
 html {
 background: linear-gradient(145deg, #e8ddd5 0%, #d5c8c0 100%);
 }
 
+/* Ajuste do canvas para não vazar */
 #canvas-bg {
 left: 50%;
 transform: translateX(-50%);
 width: 430px !important;
 }
 
+/* Ajuste dos petalas */
 .petal {
 left: calc(50% + (Math.random() * 430px - 215px)) !important;
 }
 
-/* ── BOTÕES DENTRO DA TELA COM STICKY ── */
+/* ── CORREÇÃO DOS BOTÕES PARA FICAREM DENTRO DA TELA ── */
 .surprise-btn {
-position: sticky !important;
-bottom: 100px !important;
-float: right !important;
-margin-right: 20px !important;
-margin-top: -80px !important;
-z-index: 500 !important;
+right: 16px !important;
+bottom: 90px !important;
+position: fixed !important;
 }
 
 .letter-btn {
-position: sticky !important;
-bottom: 40px !important;
-float: right !important;
-margin-right: 20px !important;
-margin-top: -60px !important;
-z-index: 500 !important;
+right: 16px !important;
+bottom: 30px !important;
+position: fixed !important;
 }
 
 .letter-btn-img {
 width: 48px !important;
+}
+
+/* Ajuste dos modais para centralizar */
+.modal-overlay,
+.envelope-overlay {
+left: 50% !important;
+transform: translateX(-50%) !important;
+width: 430px !important;
+}
+
+.modal-overlay.active,
+.envelope-overlay.active {
+transform: translateX(-50%) !important;
+}
+
+.modal-card,
+.letter-card {
+max-width: 380px !important;
+margin: 0 auto !important;
 }
 }
 
