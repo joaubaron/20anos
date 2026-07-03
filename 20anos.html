@@ -710,9 +710,9 @@ visibility: visible;
 }
 
 .letter-card {
-background: url('fotos/bgfotos.webp') center/cover no-repeat;
+background: #fdf6ea;
 border-radius: 8px;
-padding: 36px 28px 32px;
+padding: 0;
 overflow-y: auto;
 box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 20px 60px rgba(120,30,55,0.3);
 max-width: 400px;
@@ -724,7 +724,15 @@ max-height: 86vh;
 font-family: 'Dancing Script', cursive;
 font-size: 1.18rem;
 color: var(--text-warm);
-line-height: 2;
+line-height: 36px;
+padding: 34px 28px 8px 40px;
+background-color: #fdf6ea;
+background-image:
+linear-gradient(to right, rgba(200,86,110,0.28) 0, rgba(200,86,110,0.28) 1.5px, transparent 1.5px),
+repeating-linear-gradient(to bottom, transparent 0, transparent 34px, rgba(120,70,60,0.16) 34px, rgba(120,70,60,0.16) 35px);
+background-position: 22px 0, 0 30px;
+background-repeat: no-repeat, repeat-y;
+background-size: auto, 100% 35px;
 }
 
 .letter-card-inner .letter-to {
@@ -732,11 +740,9 @@ font-size: 1.45rem;
 font-weight: 600;
 color: var(--rose);
 display: block;
-margin-bottom: 16px;
 }
 
 .letter-card-inner .letter-sig {
-margin-top: 20px;
 font-size: 1.3rem;
 font-weight: 600;
 color: var(--rose);
@@ -882,14 +888,15 @@ Uma surpresa
 <div class="letter-card-inner">
 <span class="letter-to">Cláudia,</span>
 Vinte anos atrás eu não sabia que aquele primeiro olhar em Jaguaruna ia mudar tudo.
-<br><br>
+<br>
 Desde então você virou meu lar. Não o lugar — você. Onde você está é onde eu quero estar.
-<br><br>
+<br>
 Passamos por tanta coisa juntos. Mudanças, conquistas, dias difíceis, risadas sem fim, chope, vinhos, sempre de mãos dadas em cada curva.
-<br><br>
+<br>
 Lembre-se que eu passei pela sua vida com uma vontade imensa de ficar.
-<br><br>
+<br>
 Hoje eu só tenho uma certeza: escolheria tudo de novo. Cada dia. Cada vez.
+<br>
 <span class="letter-sig">Te amo hoje, te amo sempre.<br>Augusto ❤️</span>
 </div>
 <button class="letter-close-btn" id="letterCloseBtn">fechar</button>
