@@ -811,68 +811,40 @@ background: var(--rose) !important;
 color: white !important;
 }
 
-/* ── MOCKUP DE CELULAR NO DESKTOP ── */
+/* ── FORÇAR TELA VERTICAL NO BROWSER ── */
 @media (min-width: 768px) {
 body {
-max-width: 400px;
-margin: 20px auto;
-border-radius: 32px;
-box-shadow: 
-0 0 0 1px rgba(0,0,0,0.04),
-0 20px 80px rgba(0,0,0,0.20),
-0 60px 120px rgba(0,0,0,0.08);
-overflow: hidden;
-min-height: calc(100vh - 40px);
+max-width: 430px;
+margin: 0 auto;
+border-left: 1px solid rgba(200,86,110,0.1);
+border-right: 1px solid rgba(200,86,110,0.1);
+box-shadow: 0 0 40px rgba(0,0,0,0.08);
+min-height: 100vh;
+background: #f0e8e0;
 position: relative;
-background: var(--cream);
-border: 6px solid #1a1a1a;
-border-top-width: 40px;
-border-bottom-width: 40px;
 }
 
-body::before {
-content: '●●●';
-position: absolute;
-top: -28px;
-left: 50%;
-transform: translateX(-50%);
-color: #333;
-font-size: 10px;
-letter-spacing: 8px;
-font-weight: 300;
-}
-
-body::after {
-content: '';
-position: absolute;
-bottom: -18px;
-left: 50%;
-transform: translateX(-50%);
-width: 80px;
-height: 4px;
-background: #333;
-border-radius: 20px;
-}
-
-#canvas-bg {
-left: 50%;
-transform: translateX(-50%);
-width: 400px !important;
-border-radius: 0;
-}
-
-#opening, #main-content {
-max-width: 400px;
+/* Container centralizado */
+#main-content, #opening {
+max-width: 430px;
 margin: 0 auto;
 }
 
+/* Fundo externo mais bonito */
 html {
-background: #2a1a1a;
-padding: 0;
-display: flex;
-align-items: center;
-justify-content: center;
-min-height: 100vh;
+background: linear-gradient(145deg, #e8ddd5 0%, #d5c8c0 100%);
+}
+
+/* Ajuste do canvas para não vazar */
+#canvas-bg {
+left: 50%;
+transform: translateX(-50%);
+width: 430px !important;
+}
+
+/* Ajuste dos petalas */
+.petal {
+left: calc(50% + (Math.random() * 430px - 215px)) !important;
 }
 }
 
