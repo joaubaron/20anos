@@ -1,0 +1,22 @@
+{
+  "name": "20 Anos Juntos ❤️",
+  "short_name": "20 Anos",
+  "description": "Celebração de 20 anos de amor",
+  "start_url": "20anos.html",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#fffaf7",
+  "theme_color": "#c8566e",
+  "icons": [
+    {
+      "src": "icone-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icone-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
