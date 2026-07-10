@@ -1012,6 +1012,12 @@ todos esses anos, Cláudia.<br>
 
 <script>
 
+if ('serviceWorker' in navigator) {
+window.addEventListener('load', function() {
+navigator.serviceWorker.register('sw.js').catch(function() {});
+});
+}
+
 (function() {
 window.scrollTo(0, 0);
 if (document.readyState === 'complete') {
