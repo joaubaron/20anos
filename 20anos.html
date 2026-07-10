@@ -315,6 +315,14 @@ transform: scale(1.05);
 filter: sepia(0%) saturate(1.05);
 }
 
+.frame::after {
+content: '';
+position: absolute;
+inset: 0;
+box-shadow: inset 0 0 5px 3px #fff;
+pointer-events: none;
+}
+
 .photo-date {
 position: absolute;
 top: 10px;
