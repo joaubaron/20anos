@@ -1,7 +1,7 @@
-// Service Worker do 20anos.html
-// Toda vez que trocar fotos/áudios, aumente o número da versão abaixo
-// (isso força os dispositivos a baixarem os arquivos novos em vez de usar o cache antigo).
-const CACHE_NAME = '20anos-cache-v1';
+// Service Worker 
+// Toda vez que trocar fotos/áudios, a versão será atualizada automaticamente pelo deploy.yml
+const CACHE_VERSION = '10.07.2026-1135';
+const CACHE_NAME = `20anos-${CACHE_VERSION}`;
 
 const ASSETS = [
   './20anos.html',
