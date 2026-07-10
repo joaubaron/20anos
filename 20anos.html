@@ -840,11 +840,6 @@ transform: translateX(-50%);
 width: 430px !important;
 }
 
-/* Ajuste dos petalas */
-.petal {
-left: calc(50% + (Math.random() * 430px - 215px)) !important;
-}
-
 /* ── CORREÇÃO DOS BOTÕES PARA FICAREM DENTRO DA TELA ── */
 .surprise-btn {
 right: 16px !important;
@@ -1024,11 +1019,6 @@ window.scrollTo(0, 0);
 } else {
 window.addEventListener('load', function() { window.scrollTo(0, 0); });
 }
-document.addEventListener('visibilitychange', function() {
-if (document.visibilityState === 'visible') {
-setTimeout(function() { window.scrollTo(0, 0); }, 50);
-}
-});
 })();
 
 const memories = [
