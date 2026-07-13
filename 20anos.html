@@ -308,6 +308,12 @@ transition: filter 0.5s ease, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94
 filter: sepia(8%) saturate(0.95);
 }
 
+.frame:has(.foto-overlay) img {
+inset: 0 !important;
+width: 100% !important;
+height: 100% !important;
+}
+
 .polaroid:hover .frame img {
 transform: scale(1.05);
 filter: sepia(0%) saturate(1.05);
