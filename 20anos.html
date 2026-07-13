@@ -728,13 +728,18 @@ font-size: 1.18rem;
 color: var(--text-warm);
 line-height: 36px;
 padding: 30px 28px 8px 40px;
-background-color: #fdf6ea;
+min-height: 100%;
+background-color: #f7ecd8;
 background-image:
+url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.47 0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+radial-gradient(ellipse 200px 150px at 12% 18%, rgba(150,110,60,0.06), transparent 60%),
+radial-gradient(ellipse 240px 170px at 88% 52%, rgba(150,110,60,0.05), transparent 60%),
+radial-gradient(ellipse 180px 130px at 35% 88%, rgba(150,110,60,0.06), transparent 60%),
 linear-gradient(to right, rgba(200,86,110,0.28) 0, rgba(200,86,110,0.28) 1.5px, transparent 1.5px),
 repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(120,70,60,0.16) 35px, rgba(120,70,60,0.16) 36px);
-background-position: 22px 0, 0 28px;
-background-repeat: no-repeat, repeat-y;
-background-size: auto, 100% 36px;
+background-position: 0 0, 0 0, 0 0, 0 0, 22px 0, 0 28px;
+background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat-y;
+background-size: 180px 180px, auto, auto, auto, auto, 100% 36px;
 }
 
 .letter-card-inner .letter-to {
