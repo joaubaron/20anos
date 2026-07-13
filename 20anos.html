@@ -1092,46 +1092,6 @@ loop();
 const opening = document.getElementById('opening');
 const mainContent = document.getElementById('main-content');
 
-// Adicione esta função no seu <script>
-function criarPetalasAbertura() {
-const petalas = ['💗', '💕'];
-
-// Verifica se a abertura ainda está visível
-if (opening.style.display === 'none') return;
-
-const intervalo = setInterval(() => {
-// Para quando a abertura sumir
-if (opening.style.display === 'none' || opening.classList.contains('fade-out')) {
-clearInterval(intervalo);
-return;
-}
-
-const p = document.createElement('div');
-p.className = 'petal';
-p.textContent = petalas[Math.floor(Math.random() * petalas.length)];
-p.style.left = Math.random() * 100 + 'vw';
-p.style.top = '-5%';
-p.style.animationDuration = (Math.random() * 4 + 3) + 's';
-p.style.fontSize = (Math.random() * 20 + 14) + 'px';
-p.style.opacity = Math.random() * 0.4 + 0.3;
-p.style.zIndex = '9999';
-p.style.pointerEvents = 'none';
-
-document.body.appendChild(p);
-
-setTimeout(() => {
-if (p.parentNode) p.remove();
-}, 7000);
-
-}, 500); // Nova pétala a cada 500ms
-}
-
-// Chame a função quando a página carregar
-document.addEventListener('DOMContentLoaded', function() {
-// Inicia as pétalas na tela de abertura
-criarPetalasAbertura();
-});
-
 function startExperience() {
 opening.classList.add('fade-out');
 setTimeout(() => { opening.style.display = 'none'; mainContent.classList.add('visible'); }, 1500);
