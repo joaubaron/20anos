@@ -298,8 +298,10 @@ cursor: pointer;
 }
 
 .frame img {
-width: 100%;
-height: 100%;
+position: absolute;
+inset: -1px;
+width: calc(100% + 2px);
+height: calc(100% + 2px);
 object-fit: cover;
 display: block;
 -webkit-touch-callout: none;
