@@ -308,12 +308,6 @@ transition: filter 0.5s ease, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94
 filter: sepia(8%) saturate(0.95);
 }
 
-.frame:has(.foto-overlay) img {
-inset: 0 !important;
-width: 100% !important;
-height: 100% !important;
-}
-
 .polaroid:hover .frame img {
 transform: scale(1.05);
 filter: sepia(0%) saturate(1.05);
@@ -1220,14 +1214,13 @@ activeOverlay = null;
 activeFrame = null;
 ol.style.opacity = '0';
 
-// 🔧 AQUI: restaura a imagem com inset -2px
+// 🔧 RESTAURA A IMAGEM PARA O TAMANHO ORIGINAL (com inset -2px)
 if (fr) {
 const img = fr.querySelector('img');
 if (img) {
 img.style.inset = '';
 img.style.width = '';
 img.style.height = '';
-img.style.position = '';
 }
 }
 
@@ -1237,6 +1230,15 @@ setTimeout(() => ol.remove(), 450);
 function toggleOverlay(frame) {
 if (activeFrame === frame) { removeOverlay(); return; }
 removeOverlay();
+
+// 🔧 CORREÇÃO: faz a imagem encolher (voltar ao normal) - UMA VEZ SÓ
+const img = frame.querySelector('img');
+if (img) {
+img.style.inset = '0';
+img.style.width = '100%';
+img.style.height = '100%';
+img.style.position = 'absolute';
+}
 
 const overlay = document.createElement('div');
 overlay.className = 'foto-overlay';
@@ -1261,15 +1263,6 @@ font-weight: 600;
 `;
 msg.textContent = secretMsgs[idx] || '💕';
 overlay.appendChild(msg);
-
-// 🔧 AQUI: força a imagem a voltar ao normal
-const img = frame.querySelector('img');
-if (img) {
-img.style.inset = '0';
-img.style.width = '100%';
-img.style.height = '100%';
-img.style.position = 'absolute';
-}
 
 frame.appendChild(overlay);
 
