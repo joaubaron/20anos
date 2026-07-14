@@ -7,6 +7,7 @@ const ASSETS = [
 './20anos.html',
 './manifest.json',
 './fotos/fotobg.webp',
+'./fotos/claudiamp3.webp',
 './fotos/carta.png',
 './lavitaadesso.mp3',
 './viversemar.mp3',
