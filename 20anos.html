@@ -307,6 +307,51 @@ transition: filter 0.5s ease, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94
 filter: sepia(8%) saturate(0.95);
 }
 
+.entry-especial .polaroid {
+max-width: 320px;
+box-shadow:
+0 1px 3px rgba(0,0,0,0.04),
+0 0 0 2px var(--gold),
+0 10px 34px -4px rgba(212,169,106,0.4);
+animation: goldPulse 2.5s ease-in-out infinite;
+}
+
+.entry-especial .photo-date {
+background: rgba(212,169,106,0.9);
+color: #fff;
+}
+
+.entry-especial .entry-node {
+background: var(--gold);
+box-shadow: 0 0 0 4px var(--blush), 0 0 20px rgba(212,169,106,0.6);
+}
+
+.entry-especial .polaroid::after {
+content: '20';
+position: absolute;
+top: -14px;
+left: -14px;
+width: 52px;
+height: 52px;
+border-radius: 50%;
+background: radial-gradient(circle at 35% 30%, #e8c98a, var(--gold));
+color: #fff;
+font-family: 'Dancing Script', cursive;
+font-size: 1.6rem;
+font-weight: 700;
+display: flex;
+align-items: center;
+justify-content: center;
+transform: rotate(-12deg);
+box-shadow: 0 4px 14px rgba(212,169,106,0.5), 0 0 0 2px rgba(255,255,255,0.6);
+z-index: 25;
+}
+
+@keyframes goldPulse {
+0%, 100% { box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 0 0 2px var(--gold), 0 10px 34px -4px rgba(212,169,106,0.4); }
+50% { box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 0 0 3px var(--gold), 0 14px 44px -4px rgba(212,169,106,0.6); }
+}
+
 .polaroid:hover .frame img {
 transform: scale(1.05);
 filter: sepia(0%) saturate(1.05);
@@ -325,7 +370,7 @@ font-size: 0.65rem;
 font-weight: bold;
 color: var(--rose);
 letter-spacing: 0.08em;
-z-index: 3;
+z-index: 21;
 pointer-events: none;
 }
 
@@ -1109,7 +1154,7 @@ const timelineContainer = document.getElementById('timeline');
 const fragment = document.createDocumentFragment();
 for (let i = 1; i <= 20; i++) {
 const entry = document.createElement('div');
-entry.className = 'entry';
+entry.className = i === 20 ? 'entry entry-especial' : 'entry';
 const imgSrc = `fotos/foto${i}.webp`;
 const date = datesList[i - 1];
 const caption = memories[i - 1];
