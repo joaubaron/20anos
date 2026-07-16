@@ -307,28 +307,6 @@ transition: filter 0.5s ease, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94
 filter: sepia(8%) saturate(0.95);
 }
 
-.entry-especial .polaroid::after {
-content: '20';
-position: absolute;
-top: -16px;
-left: -16px;
-width: 56px;
-height: 56px;
-background: radial-gradient(circle at 35% 30%, #e8c98a, var(--gold));
-color: #fff;
-font-family: 'Dancing Script', cursive;
-font-size: 1.35rem;
-font-weight: 700;
-display: flex;
-align-items: center;
-justify-content: center;
-padding-bottom: 10px;
-transform: rotate(-12deg);
-box-shadow: 0 4px 14px rgba(212,169,106,0.5);
-z-index: 25;
-clip-path: path("M28 46 C14 34, 2 22, 2 12 C2 4, 10 -2, 18 2 C24 5, 28 10, 28 14 C28 10, 32 5, 38 2 C46 -2, 54 4, 54 12 C54 22, 42 34, 28 46 Z");
-}
-
 .polaroid:hover .frame img {
 transform: scale(1.05);
 filter: sepia(0%) saturate(1.05);
@@ -347,7 +325,7 @@ font-size: 0.65rem;
 font-weight: bold;
 color: var(--rose);
 letter-spacing: 0.08em;
-z-index: 21;
+z-index: 3;
 pointer-events: none;
 }
 
@@ -1077,7 +1055,7 @@ const datesList = [
 "05/04/2007","06/04/2007","07/04/2007","05/06/2007","05/09/2007",
 "08/03/2008","14/10/2009","03/11/2010","10/07/2011","30/05/2015",
 "12/06/2016","09/02/2020","20/01/2021","07/03/2022","09/03/2023",
-"13/10/2024","24/02/2025","10/08/2025","06/06/2026","05/04/2027"
+"13/10/2024","24/02/2025","10/08/2025","06/06/2026","❤️ 2027"
 ];
 
 (function initCanvas() {
@@ -1131,7 +1109,7 @@ const timelineContainer = document.getElementById('timeline');
 const fragment = document.createDocumentFragment();
 for (let i = 1; i <= 20; i++) {
 const entry = document.createElement('div');
-entry.className = i === 20 ? 'entry entry-especial' : 'entry';
+entry.className = 'entry';
 const imgSrc = `fotos/foto${i}.webp`;
 const date = datesList[i - 1];
 const caption = memories[i - 1];
