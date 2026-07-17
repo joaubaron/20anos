@@ -1146,22 +1146,39 @@ io.observe(document.getElementById('finale'));
 
 const audio = document.getElementById('surpriseAudio');
 let bgAudio = null;
+let bgPlaying = false; // ← NOVO
+
 function playBg() {
+if (bgPlaying) return; // ← NOVO
 if (!bgAudio) {
 bgAudio = new Audio('lavitaadesso.mp3');
 bgAudio.loop = true;
 bgAudio.volume = 0.5;
 }
-bgAudio.play().catch(() => {});
+bgAudio.play().then(() => bgPlaying = true).catch(() => {}); // ← mudou
 }
-function pauseBg() { if (bgAudio) bgAudio.pause(); }
+
+function pauseBg() { 
+if (bgAudio) {
+bgAudio.pause();
+bgPlaying = false; // ← NOVO
+}
+}
+
 function playAudio() {
 pauseBg();
 audio.src = 'vivercomvoce.mp3';
-audio.load(); audio.currentTime = 0;
+audio.load();
+audio.currentTime = 0;
 audio.play().catch(() => {});
 }
-function stopAudio() { audio.pause(); audio.currentTime = 0; playBg(); }
+
+function stopAudio() {
+audio.pause();
+audio.currentTime = 0;
+bgPlaying = false; // ← NOVO
+playBg();
+}
 
 function criarPetalas() {
 const petals = ['🌸','🌹','🌷','💗','🌺','💮'];
