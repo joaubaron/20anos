@@ -10,7 +10,7 @@ const ASSETS = [
 './fotos/claudiamp3.webp',
 './fotos/carta.png',
 './lavitaadesso.mp3',
-'./viversemar.mp3',
+'./vivercomvoce.mp3',
 './fotos/foto1.webp',
 './fotos/foto2.webp',
 './fotos/foto3.webp',
