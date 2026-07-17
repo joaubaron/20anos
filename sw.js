@@ -1,6 +1,6 @@
 // Service Worker 
 // Toda vez que trocar fotos/áudios, a versão será atualizada automaticamente pelo deploy.yml
-const CACHE_VERSION = '17.07.2026-1228';
+const CACHE_VERSION = '17.07.2026-1235';
 const CACHE_NAME = `20anos-${CACHE_VERSION}`;
 
 const ASSETS = [
