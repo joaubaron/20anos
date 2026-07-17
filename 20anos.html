@@ -1153,7 +1153,7 @@ if (bgPlaying) return; // ← NOVO
 if (!bgAudio) {
 bgAudio = new Audio('lavitaadesso.mp3');
 bgAudio.loop = true;
-bgAudio.volume = 0.5;
+bgAudio.volume = 0.3;
 }
 bgAudio.play().then(() => bgPlaying = true).catch(() => {}); // ← mudou
 }
