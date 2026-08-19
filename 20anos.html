@@ -331,6 +331,11 @@ z-index: 3;
 pointer-events: none;
 }
 
+.photo-date.date-left {
+right: auto;
+left: 10px;
+}
+
 .caption {
 margin-top: 12px;
 font-family: 'Dancing Script', cursive;
@@ -1194,14 +1199,16 @@ const entry = document.createElement('div');
 entry.className = 'entry';
 const imgSrc = `fotos/foto${i}.webp`;
 const { date, caption, hover } = timelineData[i - 1];
+const dateLeftIndices = [1,2,3,4,5,9,11,14,15,16,18,19,20];
+const dateClass = dateLeftIndices.includes(i) ? ' date-left' : '';
 entry.innerHTML = `
 <div class="entry-node"></div>
 <div class="polaroid">
 <div class="frame" id="frame-${i}">
-<div class="photo-date">${date}</div>
+<div class="photo-date${dateClass}">${date}</div>
 <img src="${imgSrc}" alt="${caption}" loading="lazy"
 onerror="this.onerror=null;
-this.parentElement.innerHTML='<div class=\\'ph\\'><span>💌</span><span>${caption.replace(/'/g,"&#39;")}</span></div><div class=\\'photo-date\\'>${date}</div>';">
+this.parentElement.innerHTML='<div class=\\'ph\\'><span>💌</span><span>${caption.replace(/'/g,"&#39;")}</span></div><div class=\\'photo-date${dateClass}\\'>${date}</div>';">
 </div>
 <div class="caption">
 ${caption}<br>
