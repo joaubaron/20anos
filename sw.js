@@ -8,6 +8,7 @@ const ASSETS = [
 './manifest.json',
 './fotos/fotobg.webp',
 './fotos/claudiamp3.webp',
+'./fotos/aliancas.webp',
 './fotos/carta.png',
 './vivirsinaire.mp3',
 './vivercomvoce.mp3',
