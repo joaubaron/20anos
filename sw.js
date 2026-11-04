@@ -1,6 +1,6 @@
 // Service Workers
 // Toda vez que trocar fotos/áudios, a versão será atualizada automaticamente pelo deploy.yml
-const CACHE_VERSION = '04.11.2026-1416';
+const CACHE_VERSION = '04.11.2026-1417';
 const CACHE_NAME = `20anos-${CACHE_VERSION}`;
 const ASSETS = [
 
@@ -9,7 +9,7 @@ const ASSETS = [
 './fotos/fotobg.webp',
 './fotos/claudiamp3.webp',
 './fotos/carta.png',
-'./lavitaadesso.mp3',
+'./vivirsinaire.mp3',
 './vivercomvoce.mp3',
 './fotos/foto1.webp',
 './fotos/foto2.webp',
