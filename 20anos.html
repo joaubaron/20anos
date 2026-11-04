@@ -1044,6 +1044,16 @@ Hoje eu só tenho uma certeza: escolheria tudo de novo. Cada dia. Cada vez. <str
 </div>
 </div>
 
+<!-- MODAL VÍDEO (NOVO) -->
+<div class="modal-overlay" id="videoModal">
+<div class="modal-card">
+<div class="modal-deco"></div>
+<div class="modal-title">Nossa música</div>
+<div id="videoBox" style="aspect-ratio:16/9;margin-top:16px;"></div>
+<button class="close-btn" id="closeVideoBtn">fechar</button>
+</div>
+</div>
+
 <div id="main-content">
 <header class="site-header">
 <div class="header-eyebrow">5 de abril de 2007</div>
@@ -1297,6 +1307,29 @@ modal.classList.remove('active'); stopAudio();
 modal.addEventListener('click', (e) => {
 if (e.target === modal) { modal.classList.remove('active'); stopAudio(); }
 });
+
+// ── VÍDEO DENTRO DO APP (NOVO) ──
+const videoModal = document.getElementById('videoModal');
+const videoBox = document.getElementById('videoBox');
+
+function abrirVideo() {
+pauseBg();
+videoBox.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/W2fTh8vAtuA?rel=0&playsinline=1&autoplay=1" style="width:100%;height:100%;border:0;border-radius:6px;" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+videoModal.classList.add('active');
+}
+
+function fecharVideo() {
+videoModal.classList.remove('active');
+videoBox.innerHTML = '';
+playBg();
+}
+
+document.querySelector('.finale-music').addEventListener('click', (e) => {
+e.preventDefault();
+abrirVideo();
+});
+document.getElementById('closeVideoBtn').addEventListener('click', fecharVideo);
+videoModal.addEventListener('click', (e) => { if (e.target === videoModal) fecharVideo(); });
 
 // ── OVERLAY COM FADE SUAVE ──
 // Mensagem secreta da foto do finale (alianças), que não faz parte da timeline de 20 fotos
