@@ -660,9 +660,6 @@ font-size: 1.15rem;
 color: var(--rose);
 text-decoration: none;
 font-style: normal;
-touch-action: manipulation;
--webkit-user-select: none;
-user-select: none;
 }
 
 .petal {
@@ -868,24 +865,6 @@ background: var(--rose) !important;
 .letter-close-btn:active {
 background: var(--rose) !important;
 color: white !important;
-}
-
-/* Tira a marca quadrada dos links */
-.video-fallback,
-.finale-music {
-outline: none !important;
--webkit-tap-highlight-color: transparent !important;
-}
-
-.video-fallback:focus,
-.video-fallback:focus-visible,
-.video-fallback:active,
-.finale-music:focus,
-.finale-music:focus-visible,
-.finale-music:active {
-outline: none !important;
-box-shadow: none !important;
-background: transparent !important;
 }
 
 /* ── FORÇAR TELA VERTICAL NO BROWSER ── */
@@ -1362,18 +1341,6 @@ abrirVideo();
 });
 document.getElementById('closeVideoBtn').addEventListener('click', fecharVideo);
 videoModal.addEventListener('click', (e) => { if (e.target === videoModal) fecharVideo(); });
-
-// Link "Não abriu?": remove o iframe antes de sair, evita o retângulo piscando e o áudio duplicado
-document.querySelector('.video-fallback').addEventListener('click', (e) => {
-e.preventDefault();
-videoBox.innerHTML = '';
-videoModal.style.transition = 'none';
-videoModal.classList.remove('active');
-setTimeout(() => {
-window.open('https://youtu.be/W2fTh8vAtuA', '_blank', 'noopener');
-setTimeout(() => { videoModal.style.transition = ''; }, 500);
-}, 80);
-});
 
 // ── OVERLAY COM FADE SUAVE ──
 // Mensagem secreta da foto do finale (alianças), que não faz parte da timeline de 20 fotos
