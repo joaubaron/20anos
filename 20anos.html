@@ -660,6 +660,9 @@ font-size: 1.15rem;
 color: var(--rose);
 text-decoration: none;
 font-style: normal;
+touch-action: manipulation;
+-webkit-user-select: none;
+user-select: none;
 }
 
 .petal {
@@ -1359,6 +1362,13 @@ abrirVideo();
 });
 document.getElementById('closeVideoBtn').addEventListener('click', fecharVideo);
 videoModal.addEventListener('click', (e) => { if (e.target === videoModal) fecharVideo(); });
+
+// Link "Não abriu?": remove o iframe antes de sair, evita o retângulo piscando e o áudio duplicado
+document.querySelector('.video-fallback').addEventListener('click', (e) => {
+e.preventDefault();
+videoBox.innerHTML = '';
+window.open('https://youtu.be/W2fTh8vAtuA', '_blank', 'noopener');
+});
 
 // ── OVERLAY COM FADE SUAVE ──
 // Mensagem secreta da foto do finale (alianças), que não faz parte da timeline de 20 fotos
