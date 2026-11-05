@@ -1367,7 +1367,12 @@ videoModal.addEventListener('click', (e) => { if (e.target === videoModal) fecha
 document.querySelector('.video-fallback').addEventListener('click', (e) => {
 e.preventDefault();
 videoBox.innerHTML = '';
+videoModal.style.transition = 'none';
+videoModal.classList.remove('active');
+setTimeout(() => {
 window.open('https://youtu.be/W2fTh8vAtuA', '_blank', 'noopener');
+setTimeout(() => { videoModal.style.transition = ''; }, 500);
+}, 80);
 });
 
 // ── OVERLAY COM FADE SUAVE ──
