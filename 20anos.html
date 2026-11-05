@@ -867,6 +867,24 @@ background: var(--rose) !important;
 color: white !important;
 }
 
+/* Tira a marca quadrada dos links */
+.video-fallback,
+.finale-music {
+outline: none !important;
+-webkit-tap-highlight-color: transparent !important;
+}
+
+.video-fallback:focus,
+.video-fallback:focus-visible,
+.video-fallback:active,
+.finale-music:focus,
+.finale-music:focus-visible,
+.finale-music:active {
+outline: none !important;
+box-shadow: none !important;
+background: transparent !important;
+}
+
 /* ── FORÇAR TELA VERTICAL NO BROWSER ── */
 @media (min-width: 768px) {
 body {
