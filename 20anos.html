@@ -533,8 +533,12 @@ inset 0 1px 0 rgba(255,255,255,0.55);
 50% { box-shadow: 0 10px 34px rgba(200,86,110,0.65), 0 0 0 10px rgba(232,132,154,0.08), inset 0 1px 0 rgba(255,255,255,0.45); }
 }
    
-#opening .surprise-btn {
-display: none;
+/* botões só aparecem depois que a pessoa toca na abertura */
+body:not(.started) .surprise-btn,
+body:not(.started) .letter-btn {
+opacity: 0 !important;
+visibility: hidden !important;
+pointer-events: none !important;
 }
 
 @keyframes btnFloat {
@@ -748,7 +752,6 @@ transition: all 0.35s cubic-bezier(0.34,1.4,0.64,1);
 animation: btnFloat 3.5s ease-in-out 0.5s infinite;
 filter: drop-shadow(0 4px 12px rgba(200,86,110,0.35));
 }
-#opening .letter-btn { display: none; }
 .letter-btn:hover {
 transform: scale(1.08) translateY(-2px);
 filter: drop-shadow(0 8px 20px rgba(200,86,110,0.5));
@@ -1245,6 +1248,7 @@ const opening = document.getElementById('opening');
 const mainContent = document.getElementById('main-content');
 
 function startExperience() {
+document.body.classList.add('started');
 opening.classList.add('fade-out');
 setTimeout(() => { opening.style.display = 'none'; mainContent.classList.add('visible'); }, 1500);
 playBg();
