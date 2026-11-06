@@ -969,6 +969,29 @@ margin: 0 auto !important;
 }
 }
 
+
+/* ── AVISO: CELULAR DEITADO ── */
+#rotate-warning { display: none; }
+@media (orientation: landscape) and (max-height: 500px) {
+#rotate-warning {
+position: fixed;
+inset: 0;
+z-index: 100000;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 14px;
+background: linear-gradient(160deg, #fffaf7 0%, #fde8ee 100%);
+color: #b8485e;
+font-family: 'Dancing Script', cursive;
+font-size: 1.8rem;
+text-align: center;
+padding: 20px;
+}
+#rotate-warning .rotate-icon { font-size: 3rem; }
+}
+
 /* ── ACESSIBILIDADE: respeita quem pede menos movimento ── */
 @media (prefers-reduced-motion: reduce) {
 *, *::before, *::after {
@@ -984,6 +1007,7 @@ scroll-behavior: auto !important;
 </style>
 </head>
 <body>
+<div id="rotate-warning"><div class="rotate-icon">📱</div><div>Vire o celular em pé</div></div>
 
 <div id="opening">
 <div id="opening-bg"></div>
@@ -1247,7 +1271,21 @@ ctx.clearRect(0, 0, W, H); // quem pediu menos movimento não vê as partículas
 const opening = document.getElementById('opening');
 const mainContent = document.getElementById('main-content');
 
+// trava na vertical (Android): precisa de toque; no navegador exige tela cheia
+function travarVertical() {
+const lock = () => screen.orientation && screen.orientation.lock
+? screen.orientation.lock('portrait') : Promise.reject();
+lock().catch(() => {
+const el = document.documentElement;
+const fs = el.requestFullscreen || el.webkitRequestFullscreen;
+if (fs) {
+Promise.resolve(fs.call(el)).then(() => lock()).catch(() => {});
+}
+});
+}
+
 function startExperience() {
+travarVertical();
 document.body.classList.add('started');
 opening.classList.add('fade-out');
 setTimeout(() => { opening.style.display = 'none'; mainContent.classList.add('visible'); }, 1500);
